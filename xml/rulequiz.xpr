@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="13.2">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="rulequiz.xpr">
+        <file name="boatdef.xsd"/>
+        <file name="boatdefs.xml"/>
+        <file name="penalty.xml"/>
+        <file name="rulequiz.xsd"/>
+        <file name="start.xml"/>
+    </projectTree>
+</project>

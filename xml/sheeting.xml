@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario xmlns="rulequiz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="rulequiz file:/C:/Users/even/Prosjekter/RuleQuiz2/xml/rulequiz.xsd">
+
+  <title>Sheet adjustment test</title>
+  <animation>
+    <size width="800" height="600" frames="200"/>
+    <wind x="750" y="50"/>
+
+    <sailboat id="Red">
+      <hull type="DINGHY" colour="ff5555" length="40" beam="10"/>
+      <navdata x="50" y="300" heading="45" speed="5"/>
+      <actions>
+        <trim frame="1" auto="true"/>
+        <turn frame="20" to="90"/>
+        <turn frame="40" to="45"/>
+        <turn frame="60" to="160"/>
+        <turn frame="65" to="180"/>
+      </actions>
+    </sailboat>
+  </animation>
+</scenario>

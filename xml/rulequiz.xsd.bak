@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="rulequiz" xmlns="rulequiz"
+           elementFormDefault="qualified">
+
+    <!-- ================ Document root element ================ -->
+    <xs:element name="scenario" type="Scenario"> </xs:element>
+
+    <xs:complexType name="Scenario">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="animation" type="Animation"/>
+            <xs:element name="quiz" type="Quiz" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Animation">
+        <xs:sequence>
+            <xs:element name="size" type="Size"/>
+            <xs:element name="wind" type="Position"/>
+            <xs:element name="mark" type="Mark" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="starter" type="Starter" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="sailor" type="Sailor" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Size">
+        <xs:attribute name="width" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="height" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="frames" type="xs:positiveInteger" use="required"/>
+    </xs:complexType>
+
+    <!-- ================ Type definitions for static entities ================ -->
+    <xs:complexType name="Position">
+        <xs:attributeGroup ref="pos"/>
+    </xs:complexType>
+
+    <xs:complexType name="Mark">
+        <xs:attributeGroup ref="mark"/>
+    </xs:complexType>
+
+    <xs:complexType name="Obstruction">
+        <xs:attributeGroup ref="staticboat"/>
+    </xs:complexType>
+
+    <!-- ================ Startboat ================ -->
+    <xs:complexType name="Starter">
+        <xs:sequence>
+            <xs:element name="startboat" type="BasicBoat" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="mark" type="Mark" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="signal" type="Signal" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BasicBoat">
+        <xs:attributeGroup ref="staticboat"/>
+    </xs:complexType>
+
+    <xs:attributeGroup name="staticboat">
+        <xs:attribute name="type" type="BoatType" use="required"/>
+        <xs:attribute name="colour" type="xs:hexBinary" use="optional" default="aabbcc"/>
+      <xs:attribute name="heading" type="xs:integer" default="0"/>
+        <xs:attributeGroup ref="pos"/>
+    </xs:attributeGroup>
+
+    <xs:simpleType name="BoatType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Dinghy"/>
+            <xs:enumeration value="Keelboat"/>
+            <xs:enumeration value="Rib"/>
+            <xs:enumeration value="Tug"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Signal">
+        <xs:attribute name="frame" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="up" type="Flag"/>
+        <xs:attribute name="down" type="Flag"/>
+    </xs:complexType>
+
+    <xs:simpleType name="FlagList">
+        <xs:list itemType="Flag"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Flag">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CLASSFLAG"/>
+            <xs:enumeration value="P"/>
+            <xs:enumeration value="I"/>
+            <xs:enumeration value="Z"/>
+            <xs:enumeration value="BLACKFLAG"/>
+            <xs:enumeration value="IND_RECALL"/>
+            <xs:enumeration value="GEN_RECALL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ================ Sailing boats ================ -->
+    <xs:complexType name="Sailor">
+        <xs:sequence>
+            <xs:element name="boat" type="Sailboat" minOccurs="1" maxOccurs="1"/>
+            <xs:group ref="ActionElements"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Sailboat">
+        <xs:attributeGroup ref="sailboat"/>
+    </xs:complexType>
+
+    <xs:attributeGroup name="sailboat">
+        <xs:attributeGroup ref="staticboat"/>
+        <xs:attribute name="tack" type="TackType" use="required"/>
+        <xs:attribute name="autotrim" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="speed" type="xs:float" use="optional"/>
+        <xs:attribute name="showoverlap" type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="twa" type="xs:boolean"/>
+    </xs:attributeGroup>
+
+    <!-- Script and actions  -->
+    <xs:group name="ActionElements">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="luff" type="Turn"/>
+                <xs:element name="tack" type="Turn"/>
+                <xs:element name="bearaway" type="Turn"/>
+                <xs:element name="gybe" type="Turn"/>
+                <xs:element name="trim" type="Trim"/>
+                <xs:element name="hail" type="Hail"/>
+                <xs:element name="end">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="event"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:simpleType name="TackType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PORT"/>
+            <xs:enumeration value="STARBOARD"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Turn">
+        <xs:attributeGroup ref="event"/>
+        <xs:attribute name="to" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="turnrate" type="Turnrate"/>
+    </xs:complexType>
+
+    <xs:simpleType name="Turnrate">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="slow"/>
+            <xs:enumeration value="normal"/>
+            <xs:enumeration value="max"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Trim">
+        <xs:attributeGroup ref="event"/>
+        <xs:attribute name="auto" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Hail">
+        <xs:attributeGroup ref="event"/>
+        <xs:attribute name="hail" type="xs:string" use="required"/>
+        <xs:attribute name="duration" type="xs:nonNegativeInteger" default="10"/>
+    </xs:complexType>
+
+    <!-- Quiz -->
+    <xs:complexType name="Quiz">
+        <xs:sequence>
+            <xs:element name="question" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="explanation" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="answer" type="Answer" maxOccurs="5"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="event"/>
+    </xs:complexType>
+
+    <xs:complexType name="Answer">
+        <xs:annotation>
+            <xs:documentation> A possible solution to the question. The description of the available solutions are presented to the user before choosing one. Comment1 is displayed to the user after choosing, but before the consequences of the choice are shown. Comment2 is displayed after. The reactions of the boats are specified with the actions tag. The better solutions give more points. </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="comment1" type="xs:string"/>
+            <xs:element name="comment2" type="xs:string"/>
+            <xs:element name="events" type="Events" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="points" type="xs:integer"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Events">
+        <xs:group ref="ActionElements"/>
+        <xs:attribute name="boat" type="xs:IDREF"/>
+    </xs:complexType>
+
+
+
+    <!-- ================ Attribute group definitions ================ -->
+    <xs:attributeGroup name="pos">
+        <xs:attribute name="x" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="y" type="xs:positiveInteger" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="mark">
+        <xs:attributeGroup ref="pos"/>
+        <xs:attribute name="size" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="zone" type="xs:boolean" default="false"/>
+    </xs:attributeGroup>
+
+
+    <xs:attributeGroup name="event">
+        <xs:attribute name="frame" type="xs:nonNegativeInteger" use="required"/>
+    </xs:attributeGroup>
+</xs:schema>

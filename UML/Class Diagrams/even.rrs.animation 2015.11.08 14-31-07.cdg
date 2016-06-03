@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="even.rrs.animation">
+  <ClassDiagramComponents>
+    <Class name="AbstractActor" package="even.rrs.animation" visibility="public" isAbstract="true" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="addEvent" returnType="void" visibility="public">
+          <Argument type="Event" name="e"/>
+        </Method>
+        <Method name="setup" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="boolean" visibility="public"/>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="int" name="frame"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Actor" package="even.rrs.animation" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Methods>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="int" name="frame"/>
+        </Method>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="saveState" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Class name="Animation" package="even.rrs.animation" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="FRAMERATE" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="actors" type="List&lt;Actor&gt;" visibility="package"/>
+        <Field name="visibleItems" type="List&lt;Drawable&gt;" visibility="package"/>
+        <Field name="events" type="ArrayList&lt;Event&gt;" visibility="package"/>
+        <Field name="eventQueue" type="PriorityQueue&lt;Event&gt;" visibility="package"/>
+        <Field name="state" type="State" visibility="package"/>
+        <Field name="size" type="Dimension" visibility="private"/>
+        <Field name="backgroundColour" type="Color" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="margin" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="maxFrame" type="int" visibility="package"/>
+        <Field name="curFrame" type="int" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="addEvent" returnType="void" visibility="public">
+          <Argument type="Event" name="e"/>
+        </Method>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="skipToFrame" returnType="void" visibility="public">
+          <Argument type="int" name="frame"/>
+        </Method>
+        <Method name="start" returnType="void" visibility="public"/>
+        <Method name="stepFrame" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+        <Method name="setSize" returnType="void" visibility="public">
+          <Argument type="Dimension" name="d"/>
+        </Method>
+        <Method name="setMaxFrames" returnType="void" visibility="public">
+          <Argument type="int" name="maxFrame"/>
+        </Method>
+        <Method name="addActor" returnType="void" visibility="public">
+          <Argument type="Actor" name="a"/>
+        </Method>
+        <Method name="addDrawable" returnType="void" visibility="public">
+          <Argument type="Drawable" name="d"/>
+        </Method>
+        <Method name="getState" returnType="State" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AbstractBoat" package="even.rrs.animation.boats" visibility="public" isAbstract="true" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="x" type="float" visibility="protected"/>
+        <Field name="hdg" type="Heading" visibility="protected"/>
+        <Field name="colour" type="Color" visibility="package"/>
+        <Field name="type" type="BoatType" visibility="package"/>
+        <Field name="startState" type="SavedState" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="BoatType" name="type"/>
+          <Argument type="Color" name="colour"/>
+          <Argument type="float" name="x"/>
+          <Argument type="float" name="y"/>
+          <Argument type="Heading" name="hdg"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="getHullTransform" returnType="AffineTransform" visibility="public"/>
+        <Method name="renderHull" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AbstractNavigator" package="even.rrs.animation.boats" visibility="public" isAbstract="true" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="spd" type="float" visibility="protected"/>
+        <Field name="targetSpd" type="float" visibility="protected"/>
+        <Field name="targetHdg" type="Heading" visibility="protected"/>
+        <Field name="autoTrim" type="boolean" visibility="protected"/>
+        <Field name="savedState" type="SavedState" visibility="package"/>
+        <Field name="boat" type="AbstractBoat" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="boolean" visibility="public"/>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="move" returnType="void" visibility="protected">
+          <Argument type="float" name="spd"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="BoatType" package="even.rrs.animation.boats" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Literals>
+        <Literal name="DINGHY"/>
+        <Literal name="KEELBOAT"/>
+        <Literal name="RIB"/>
+        <Literal name="TUG"/>
+      </Literals>
+    </Enum>
+    <Class name="Heading" package="even.rrs.animation.boats" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="twa" type="float" visibility="private"/>
+        <Field name="tack" type="Tack" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="float" name="heading"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="float" name="twa"/>
+          <Argument type="Tack" name="tack"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="normalize" returnType="void" visibility="private"/>
+        <Method name="getTack" returnType="Tack" visibility="public"/>
+        <Method name="getTwa" returnType="float" visibility="public"/>
+        <Method name="getHeading" returnType="float" visibility="public"/>
+        <Method name="getHdgAsRadians" returnType="float" visibility="public"/>
+        <Method name="turn" returnType="void" visibility="public">
+          <Argument type="float" name="signedAngle"/>
+        </Method>
+        <Method name="turn" returnType="void" visibility="public">
+          <Argument type="float" name="posAngle"/>
+          <Argument type="Tack" name="direction"/>
+        </Method>
+        <Method name="swapTack" returnType="void" visibility="public"/>
+        <Method name="getAngle" returnType="float" visibility="public">
+          <Argument type="Heading" name="to"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="NavigableBoat" package="even.rrs.animation.boats" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="skipper" type="Navigator" visibility="package"/>
+        <Field name="speed" type="float" visibility="package"/>
+        <Field name="autoTrim" type="boolean" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="BoatType" name="type"/>
+          <Argument type="float" name="x"/>
+          <Argument type="float" name="y"/>
+          <Argument type="float" name="speed"/>
+          <Argument type="Heading" name="hdg"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Navigator" name="skipper"/>
+          <Argument type="BoatType" name="type"/>
+          <Argument type="Color" name="colour"/>
+          <Argument type="float" name="x"/>
+          <Argument type="float" name="y"/>
+          <Argument type="float" name="speed"/>
+          <Argument type="Heading" name="hdg"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="turnTo" returnType="float" visibility="public">
+          <Argument type="Heading" name="targetHdg"/>
+          <Argument type="TurnRate" name="turnRate"/>
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="move" returnType="void" visibility="public">
+          <Argument type="float" name="dist"/>
+        </Method>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+        <Method name="getActualTurnRate" returnType="float" visibility="public">
+          <Argument type="TurnRate" name="turnRate"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Navigator" package="even.rrs.animation.boats" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Methods/>
+    </Interface>
+    <Class name="PolarDiagram" package="even.rrs.animation.boats" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="twa" type="float[]" visibility="package"/>
+        <Field name="spd" type="float[]" visibility="package"/>
+        <Field name="size" type="int" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="float[]" name="twa"/>
+          <Argument type="float[]" name="spd"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="indexOf" returnType="int" visibility="private">
+          <Argument type="float" name="twa"/>
+        </Method>
+        <Method name="getTargetSpeed" returnType="float" visibility="public">
+          <Argument type="Heading" name="hdg"/>
+          <Argument type="boolean" name="trimmed"/>
+        </Method>
+        <Method name="getAcceleration" returnType="float" visibility="public">
+          <Argument type="Heading" name="hdg"/>
+          <Argument type="boolean" name="trimmed"/>
+          <Argument type="float" name="currentSpeed"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Rig" package="even.rrs.animation.boats" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="MP" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MR" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="BW" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="BL" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="SD" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="AOA_MIN" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MIN_SHEETANGLE" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_SHEETANGLE" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MIN_HEADING" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="SHEET_RATE" type="float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="rig" type="Path2D.Float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="sail" type="Path2D.Float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="flappingSail" type="Path2D.Float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="sheetAngle" type="float" visibility="package"/>
+        <Field name="optimalTrim" type="boolean" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="trimSail" returnType="void" visibility="public">
+          <Argument type="float" name="hdg"/>
+        </Method>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="float" name="heading"/>
+          <Argument type="AffineTransform" name="hullTransform"/>
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SailBoat" package="even.rrs.animation.boats" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="overlapLine" type="Path2D.Float" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="showOverlap" type="boolean" visibility="private"/>
+        <Field name="speed" type="float" visibility="package"/>
+        <Field name="rig" type="Rig" visibility="package"/>
+        <Field name="hail" type="String" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Sailor" name="sailor"/>
+          <Argument type="BoatType" name="type"/>
+          <Argument type="Color" name="colour"/>
+          <Argument type="float" name="x"/>
+          <Argument type="float" name="y"/>
+          <Argument type="float" name="speed"/>
+          <Argument type="float" name="twa"/>
+          <Argument type="Tack" name="tack"/>
+          <Argument type="boolean" name="autoTrim"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setOptimalTrim" returnType="void" visibility="public">
+          <Argument type="boolean" name="optimalTrim"/>
+        </Method>
+        <Method name="getAcceleration" returnType="float" visibility="public"/>
+        <Method name="getTargetSpeed" returnType="float" visibility="public"/>
+        <Method name="holdCourse" returnType="float" visibility="public">
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="swapTack" returnType="void" visibility="public"/>
+        <Method name="getMinTwa" returnType="Heading" visibility="public"/>
+        <Method name="getMaxTwa" returnType="Heading" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Sailor" package="even.rrs.animation.boats" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="ACC_MARGIN" type="float" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="name" type="String" visibility="package"/>
+        <Field name="boat" type="SailBoat" visibility="package"/>
+        <Field name="currentAction" type="Action" visibility="private"/>
+        <Field name="targetTack" type="Tack" visibility="private"/>
+        <Field name="targetValue" type="float" visibility="private"/>
+        <Field name="hail" type="String" visibility="private"/>
+        <Field name="duration" type="int" visibility="private"/>
+        <Field name="savedState" type="SavedState" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="int" name="frame"/>
+        </Method>
+        <Method name="holdCourse" returnType="float" visibility="private">
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="makeTurn" returnType="float" visibility="private">
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="makeTack" returnType="float" visibility="private">
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="makeGybe" returnType="float" visibility="private">
+          <Argument type="float" name="dt"/>
+        </Method>
+        <Method name="makeHail" returnType="void" visibility="public">
+          <Argument type="String" name="hail"/>
+          <Argument type="int" name="duration"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="StartBoat" package="even.rrs.animation.boats" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="mark" type="Mark" visibility="private"/>
+        <Field name="signals" type="EnumSet&lt;Flag&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="float" name="x"/>
+          <Argument type="float" name="y"/>
+          <Argument type="Heading" name="hdg"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setMark" returnType="void" visibility="public">
+          <Argument type="Mark" name="mark"/>
+        </Method>
+        <Method name="resetSignals" returnType="void" visibility="public"/>
+        <Method name="setSignal" returnType="void" visibility="public">
+          <Argument type="Flag" name="flag"/>
+        </Method>
+        <Method name="strikeSignal" returnType="void" visibility="public">
+          <Argument type="Flag" name="flag"/>
+        </Method>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Starter" package="even.rrs.animation.boats" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="startBoat" type="StartBoat" visibility="package"/>
+        <Field name="mark" type="Mark" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="getReady" returnType="boolean" visibility="public"/>
+        <Method name="setStartBoat" returnType="void" visibility="public">
+          <Argument type="StartBoat" name="startBoat"/>
+        </Method>
+        <Method name="setMark" returnType="void" visibility="public">
+          <Argument type="Mark" name="mark"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="Tack" package="even.rrs.animation.boats" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Literals>
+        <Literal name="PORT"/>
+        <Literal name="STARBOARD"/>
+      </Literals>
+    </Enum>
+    <Interface name="Drawable" package="even.rrs.animation" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="Event" package="even.rrs.animation" visibility="public" isAbstract="true" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="frame" type="int" visibility="protected"/>
+        <Field name="actor" type="Actor" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="frame"/>
+          <Argument type="Actor" name="actor"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getFrame" returnType="int" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Event" name="that"/>
+        </Method>
+        <Method name="happen" returnType="void" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="Mark" package="even.rrs.animation" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="x" type="int" visibility="package"/>
+        <Field name="size" type="int" visibility="package"/>
+        <Field name="showZone" type="boolean" visibility="package"/>
+        <Field name="mark" type="Shape" visibility="package"/>
+        <Field name="zone" type="Shape" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="size"/>
+          <Argument type="boolean" name="showZone"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Scenario" package="even.rrs.animation" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Fields>
+        <Field name="theInstance" type="Scenario" visibility="private" isStatic="true"/>
+        <Field name="title" type="String" visibility="private"/>
+        <Field name="animation" type="Animation" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="Scenario" visibility="public" isStatic="true"/>
+        <Method name="parse" returnType="void" visibility="public">
+          <Argument type="File" name="f"/>
+        </Method>
+        <Method name="getAnimation" returnType="Animation" visibility="public"/>
+        <Method name="getTitle" returnType="String" visibility="public"/>
+        <Method name="setTitle" returnType="void" visibility="public">
+          <Argument type="String" name="title"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WindArrow" package="even.rrs.animation" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Fields>
+        <Field name="BORDER" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="HEAD_X" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="HEAD_Y" type="int" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="TEXT" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="x" type="int" visibility="private"/>
+        <Field name="y" type="int" visibility="private"/>
+        <Field name="arrow" type="Path2D.Float" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="print" returnType="void" visibility="public"/>
+        <Method name="saveState" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="Graphics2D" name="g2"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="even.rrs.animation.Animation" target="even.rrs.animation.Drawable" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.AbstractActor" target="even.rrs.animation.Event" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.boats.PolarDiagram" target="even.rrs.animation.boats.Heading" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.boats.Starter" target="even.rrs.animation.boats.StartBoat" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.boats.Heading" target="even.rrs.animation.boats.Heading" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.Animation" target="even.rrs.animation.Actor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.Starter" target="even.rrs.animation.AbstractActor"/>
+    <HasRelation name="boat" source="even.rrs.animation.boats.AbstractNavigator" target="even.rrs.animation.boats.AbstractBoat" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="startBoat" source="even.rrs.animation.boats.Starter" target="even.rrs.animation.boats.StartBoat" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.AbstractNavigator" target="even.rrs.animation.AbstractActor"/>
+    <HasRelation name="visibleItems" source="even.rrs.animation.Animation" target="even.rrs.animation.Drawable" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Drawable&gt;"/>
+    <UseRelation source="even.rrs.animation.boats.StartBoat" target="even.rrs.animation.Mark" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="type" source="even.rrs.animation.boats.AbstractBoat" target="even.rrs.animation.boats.BoatType" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="even.rrs.animation.WindArrow" target="even.rrs.animation.Drawable"/>
+    <UseRelation source="even.rrs.animation.boats.Heading" target="even.rrs.animation.boats.Tack" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.boats.SailBoat" target="even.rrs.animation.boats.Heading" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="skipper" source="even.rrs.animation.boats.NavigableBoat" target="even.rrs.animation.boats.Navigator" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.SailBoat" target="even.rrs.animation.boats.NavigableBoat"/>
+    <UseRelation source="even.rrs.animation.Scenario" target="even.rrs.animation.Animation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="eventQueue" source="even.rrs.animation.Animation" target="even.rrs.animation.Event" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="PriorityQueue&lt;Event&gt;"/>
+    <HasRelation name="actors" source="even.rrs.animation.Animation" target="even.rrs.animation.Actor" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Actor&gt;"/>
+    <UseRelation source="even.rrs.animation.boats.Starter" target="even.rrs.animation.Mark" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="animation" source="even.rrs.animation.Scenario" target="even.rrs.animation.Animation" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tack" source="even.rrs.animation.boats.Heading" target="even.rrs.animation.boats.Tack" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="boat" source="even.rrs.animation.boats.Sailor" target="even.rrs.animation.boats.SailBoat" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="actor" source="even.rrs.animation.Event" target="even.rrs.animation.Actor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="even.rrs.animation.boats.AbstractBoat" target="even.rrs.animation.Drawable"/>
+    <HasRelation name="targetTack" source="even.rrs.animation.boats.Sailor" target="even.rrs.animation.boats.Tack" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="even.rrs.animation.AbstractActor" target="even.rrs.animation.Actor"/>
+    <HasRelation name="mark" source="even.rrs.animation.boats.StartBoat" target="even.rrs.animation.Mark" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="mark" source="even.rrs.animation.boats.Starter" target="even.rrs.animation.Mark" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.Animation" target="even.rrs.animation.Event" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="events" source="even.rrs.animation.Animation" target="even.rrs.animation.Event" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Event&gt;"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.Sailor" target="even.rrs.animation.boats.AbstractNavigator"/>
+    <HasRelation name="hdg" source="even.rrs.animation.boats.AbstractBoat" target="even.rrs.animation.boats.Heading" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.boats.NavigableBoat" target="even.rrs.animation.boats.Heading" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.Event" target="even.rrs.animation.Event" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="even.rrs.animation.Scenario" target="even.rrs.animation.Scenario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.Navigator" target="even.rrs.animation.Actor"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.StartBoat" target="even.rrs.animation.boats.AbstractBoat"/>
+    <HasRelation name="rig" source="even.rrs.animation.boats.SailBoat" target="even.rrs.animation.boats.Rig" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="even.rrs.animation.Mark" target="even.rrs.animation.Drawable"/>
+    <IsRelation name="is" source="even.rrs.animation.boats.NavigableBoat" target="even.rrs.animation.boats.AbstractBoat"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="even.rrs.animation.boats.AbstractNavigator" target="even.rrs.animation.boats.Navigator"/>
+    <HasRelation name="targetHdg" source="even.rrs.animation.boats.AbstractNavigator" target="even.rrs.animation.boats.Heading" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="theInstance" source="even.rrs.animation.Scenario" target="even.rrs.animation.Scenario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem xmlns="rulequiz">
+  <intro>Test the various actions a boat can take.</intro>
+  <question>Does the action classes work as expected</question>
+  <comment></comment>
+  <animation>
+    <size width="768" height="1024" frames="200"/>
+    <wind x="10" y="10"/>
+    
+    <mark x="384" y="128" size="10"/>
+    <mark x="384" y="896" size="10"/>
+    
+    <sailboat type="Skiff" name="Red">
+      
+    </sailboat>
+      <navdata/>
+      <actions></actions>
+    </sailboat>
+  </animation>
+  <response>
+    <description></description>
+    <actions boat=""></actions>
+  </response>
+  <response>
+    <description></description>
+    <actions boat=""></actions>
+  </response>
+</problem>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boatdefs xmlns="boatdef"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="boatdef boatdef.xsd">
+
+
+  <boattype name="skiff">
+    <hullref id="skiffhull"/>
+    <rigref id="skiffrig" />
+    <perfref id="skiffperf"/>
+  </boattype>
+
+  <hull id="skiffhull" beam="3" length="5">
+    <start x="0" y="2.5"/>
+    <line x="0.6" x="0"/>
+    <line x="1.5" y="0.3" />
+    <line x="1.5" y="5"/>
+    <line x="0.6" y="4.8"/>
+    <line x="0" y="4.8"/>
+  </hull>
+
+  <rig  id="skiffrig">
+    <forestay pos="2.5 render="false" id="forestay"/>
+      <mast pos="0" diameter="0.07" id="mast"/>
+      <main chord="3" camber="0.06" attachedto="mast"/>
+      <jib chord="2" camber="0.06"/>
+      <sprit id="sprit" diameter="0.05" len="2" minangle="0" maxangle="0" attachedto="forestay"/>x
+      <gennaker chord="3" camber="0.15" attachedto="sprit"/>
+  </rig>
+
+  <performance id="skiffperf" >
+    <polar >
+      <data twa="0"speed="0"/>
+      <data twa="25"speed="5"/>
+      <data twa="40"speed="10"/>
+      <data twa="50"speed="11"/>
+      <data twa="90"speed="12"/>
+      <data twa="120"speed="12"/>
+      <data twa="140"speed="17"/>
+      <data twa="150"speed="17"/>
+      <data twa="160"speed="15"/>
+      <data twa="170"speed="8"/>
+      <data twa="180"speed="5"/>
+    </polar>
+  </performance>
+
+</boatdefs>

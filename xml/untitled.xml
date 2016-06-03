@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario xmlns="rulequiz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="rulequiz file:/C:/Users/even/Prosjekter/RuleQuiz2/xml/rulequiz.xsd">
+
+    <title>Taking a penalty</title>
+    <animation>
+        <size width="800" height="600" frames="200"/>
+        <wind x="750" y="50"/>
+
+        <sailor id="Red">
+            <boat type="DINGHY"  colour="ff5555" x="150" y="300" heading="45" tack="PORT"/>
+            <trim frame="1" auto="true"/>
+            <hail frame="15" hail="Taking a penalty!!!"  duration="20"/>
+            <gybe frame="20" to="90"/>
+            <tack frame="60" to="90"/>
+            <gybe frame="100" to="90"/>
+            <tack frame="140" to="90"/>
+        </sailor>
+    </animation>
+
+</scenario>

@@ -1,0 +1,47 @@
+attachedto
+beam
+camber
+chord
+cx
+cy
+cx1
+cy1
+cx2
+cy2
+diameter
+id
+id
+length
+point
+pos
+speed
+spline2
+spline3
+twa
+x
+y
+
+
+
+
+    <xs:sequence>
+      <xs:element name="" type="polar"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="polar">
+    <xs:sequence>
+      <xs:element name="polardata" type="polardata" minOccurs="3" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="polardata">
+  </xs:complexType>
+
+  <xs:simpleType name="heading">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="180"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
