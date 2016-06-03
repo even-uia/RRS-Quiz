@@ -94,10 +94,11 @@
 
   <xs:complexType name="rig">
     <xs:sequence>
-      <xs:element name="forestay" type="vertspar"/>
+      <xs:element name="forestay" type="vertspar" minOccurs="0"/>
       <xs:element name="mast" type="vertspar"/>
-      <xa:el
-      <xs:element name="main" type="sail"/>
+      <xs:element name="pole" type="horspar" minOccurs="0"/>
+      <xs:element name="sprit" type="horspar" minOccurs="0"/>
+      <xs:element name="main" type="sail" minOccurs="0"/>
       <xs:element name="jib" type="sail" minOccurs="0"/>
       <xs:element name="spinnaker" type="sail" minOccurs="0"/>
       <xs:element name="gennaker" type="sail" minOccurs="0"/>
@@ -109,15 +110,17 @@
     <xs:attribute name="id" type="xs:ID"/>
     <xs:attribute name="pos" type="xs:decimal"/>
     <xs:attribute name="diameter" type="xs:decimal"/>
+    <xs:attribute name="render" type="xs:boolean"  use="optional" default="true"/>
   </xs:complexType>
 
   <xs:complexType name="horspar">
     <xs:attribute name="id" type="xs:ID"/>
     <xs:attribute name="len" type="xs:decimal"/>
     <xs:attribute name="diameter" type="xs:decimal"/>
-    <xs:attribute name="minangle" type="xs:decimal">
-      <xs:attribute name="maxangle" type="xs:decimal"/>
-      <xs:attribute name="attachedto" type="xs:IDREF"/>
+    <xs:attribute name="minangle" type="xs:decimal"/>
+    <xs:attribute name="maxangle" type="xs:decimal"/>
+    <xs:attribute name="attachedto" type="xs:IDREF"/>
+    <xs:attribute name="render" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="sail">
