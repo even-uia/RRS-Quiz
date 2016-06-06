@@ -1,8 +1,5 @@
-package even.rrsquiz.xml.parsers;
+package even.rrs.xml.parsers;
 
-import even.rrsquiz.animation.action.TurnRate;
-import even.rrsquiz.animation.boat.Flag;
-import even.rrsquiz.animation.boat.HullType;
 import java.awt.Color;
 import org.xml.sax.Attributes;
 
@@ -17,14 +14,11 @@ public abstract class AbstractTagHandler implements TagHandler
     public AbstractTagHandler() {
     }
 
-
     public void handleStart(Attributes atts) {
     }
 
-
     public void handleEnd() {
     }
-
 
     // attribute value converters
     /**
@@ -35,7 +29,7 @@ public abstract class AbstractTagHandler implements TagHandler
      * @param defVal default value
      * @return
      */
-    public int getIntValue(Attributes atts, even.rrsquiz.parser.Attribute name, int defVal) {
+    public int getIntValue(Attributes atts, Attribute name, int defVal) {
         String s = atts.getValue(name.toString());
         if (null == s || s.length() == 0) {
             return defVal;
@@ -49,11 +43,10 @@ public abstract class AbstractTagHandler implements TagHandler
         }
     }
 
-
     /**
      * Convert an attribute to double
      */
-    public double getFloatValue(Attributes atts, even.rrsquiz.parser.Attribute name, double defVal) {
+    public double getFloatValue(Attributes atts, Attribute name, double defVal) {
         String s = atts.getValue(name.toString());
         if (null == s || s.length() == 0) {
             return defVal;
@@ -67,8 +60,7 @@ public abstract class AbstractTagHandler implements TagHandler
         }
     }
 
-
-    public Color getColourValue(Attributes atts, even.rrsquiz.parser.Attribute name, Color defVal) {
+    public Color getColourValue(Attributes atts, Attribute name, Color defVal) {
         String s = atts.getValue(name.toString());
         if (null == s || s.length() == 0) {
             return defVal;
@@ -83,8 +75,7 @@ public abstract class AbstractTagHandler implements TagHandler
         }
     }
 
-
-    public boolean getBooleanValue(Attributes atts, even.rrsquiz.parser.Attribute name, boolean defVal) {
+    public boolean getBooleanValue(Attributes atts, Attribute name, boolean defVal) {
         String s = atts.getValue(name.toString());
         if (null == s || s.length() == 0) {
             return defVal;
@@ -98,36 +89,7 @@ public abstract class AbstractTagHandler implements TagHandler
         }
     }
 
-
-    public Flag getFlagValue(Attributes atts, even.rrsquiz.parser.Attribute name,
-                             Flag defval) {
-        Flag flag = defval;
-        String s = atts.getValue(name.toString());
-        if (null != s)
-            flag = Flag.valueOf(s.trim());
-        return flag;
-    }
-
-
-    public TurnRate getTurnRateValue(Attributes atts, even.rrsquiz.parser.Attribute name, TurnRate defVal) {
-        String s = atts.getValue(name.toString());
-        if (null == s || s.length() == 0)
-            return defVal;
-        else
-            return TurnRate.valueOf(s);
-    }
-
-
-    public HullType getHullTypeValue(Attributes atts, even.rrsquiz.parser.Attribute name, HullType defval) {
-        String s = atts.getValue(name.toString());
-        if (null == s || s.length() == 0)
-            return defval;
-        else
-            return HullType.valueOf(s);
-    }
-
-
-    public String getStringValue(Attributes atts, even.rrsquiz.parser.Attribute name, String defVal) {
+    public String getStringValue(Attributes atts, Attribute name, String defVal) {
         String s = atts.getValue(name.toString());
         if (null == s || s.length() == 0)
             return defVal;

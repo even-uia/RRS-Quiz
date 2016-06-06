@@ -1,9 +1,9 @@
 package even.rrsquiz.animation.event;
 
 import even.rrsquiz.animation.Actor;
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 
-public class HailEvent extends Event
+public class HailEvent extends AbstractEvent
 {
 
     private String hail;
@@ -20,6 +20,6 @@ public class HailEvent extends Event
     }
 
     public String toString() {
-        return super.toString() + "[" + frame + ",'" + hail + "', " + duration + "]";
+        return super.toString() + "[" + time + ",'" + hail + "', " + duration + "]";
     }
 }

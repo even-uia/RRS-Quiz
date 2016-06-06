@@ -1,4 +1,4 @@
-package even.rrsquiz.render;
+package even.rrs.render;
 
 import java.awt.Color;
 import java.awt.Shape;

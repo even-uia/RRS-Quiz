@@ -1,6 +1,6 @@
 package even.rrsquiz.animation.event;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.boat.Flag;
 import even.rrsquiz.animation.boat.StartBoat;
 
@@ -8,7 +8,7 @@ import even.rrsquiz.animation.boat.StartBoat;
  *
  * @author even
  */
-public class SignalEvent extends Event
+public class SignalEvent extends AbstractEvent
 {
 
     Flag up, down;

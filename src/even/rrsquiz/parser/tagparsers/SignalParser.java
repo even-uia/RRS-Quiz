@@ -5,7 +5,7 @@
  */
 package even.rrsquiz.parser.tagparsers;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.boat.Flag;
 import even.rrsquiz.animation.event.SignalEvent;
 import even.rrsquiz.parser.Attribute;
@@ -28,7 +28,7 @@ public class SignalParser extends AbstractTagParser
         int frame = getIntValue(atts, Attribute.frame, -1);
         Flag up = getFlagValue(atts, Attribute.up, null);
         Flag down = getFlagValue(atts, Attribute.down, null);
-        Event e = new SignalEvent(frame, contentHandler.startBoat, up, down);
+        AbstractEvent e = new SignalEvent(frame, contentHandler.startBoat, up, down);
         contentHandler.animation.addEvent(e);
     }
 

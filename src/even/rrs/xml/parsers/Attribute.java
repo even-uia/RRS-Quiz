@@ -1,5 +1,4 @@
-package even.rrsquiz.xml.parsers;
-
+package even.rrs.xml.parsers;
 
 /**
  *
@@ -13,6 +12,7 @@ public enum Attribute
     diameter,
     id,
     length,
+    name,
     point, pos,
     speed, spline2, spline3,
     twa,

@@ -1,6 +1,6 @@
 package even.rrsquiz.parser.tagparsers;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.event.AutoTrimEvent;
 import even.rrsquiz.parser.Attribute;
 import even.rrsquiz.parser.ProblemContentHandler;
@@ -21,7 +21,7 @@ public class TrimParser extends AbstractTagParser
     public void handleStart(Attributes atts) {
         boolean autoTrim = getBooleanValue(atts, Attribute.auto, true);
         int frame = getIntValue(atts, Attribute.frame, 0);
-        Event e = new AutoTrimEvent(frame, contentHandler.sailBoat, autoTrim);
+        AbstractEvent e = new AutoTrimEvent(frame, contentHandler.sailBoat, autoTrim);
         contentHandler.animation.addEvent(e);
     }
 

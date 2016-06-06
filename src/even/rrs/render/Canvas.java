@@ -1,8 +1,8 @@
-package even.rrsquiz.render;
+package even.rrs.render;
 
 import even.rrsquiz.gui.*;
 import even.rrsquiz.animation.Animation;
-import even.rrsquiz.render.Renderable;
+import even.rrs.render.Renderable;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;

@@ -1,6 +1,6 @@
 package even.rrsquiz;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import java.util.ArrayList;
 import javax.swing.Action;
 
@@ -14,7 +14,7 @@ public class Response
     private String label;
     private String description;
     private int points;
-    private ArrayList<Event> events;
+    private ArrayList<AbstractEvent> events;
 
     public Response() {
         label = null;
@@ -23,11 +23,11 @@ public class Response
         events = new ArrayList<>();
     }
 
-    public ArrayList<Event> getEvents() {
+    public ArrayList<AbstractEvent> getEvents() {
         return events;
     }
 
-    public void AddAction(Event a) {
+    public void AddAction(AbstractEvent a) {
         events.add(a);
     }
 

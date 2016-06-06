@@ -5,14 +5,14 @@
  */
 package even.rrsquiz.animation.event;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.boat.Sailboat;
 
 /**
  *
  * @author even
  */
-public class AutoTrimEvent extends Event
+public class AutoTrimEvent extends AbstractEvent
 {
 
     private boolean auto;

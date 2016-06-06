@@ -5,7 +5,7 @@
  */
 package even.rrsquiz.parser.tagparsers;
 
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.action.AbstractAction;
 import even.rrsquiz.animation.action.TwoPartTurnAction;
 import even.rrsquiz.animation.boat.Sailboat;
@@ -39,7 +39,7 @@ public class TurnParser extends AbstractTagParser
         AbstractAction a = createAction(Math.toRadians(toHdg), rate);
         if (a instanceof TwoPartTurnAction)
             ((TwoPartTurnAction) a).setGybeAtHdg(Math.toRadians(gybeAtHdg));
-        Event e = new ActionEvent(frame, boat, a);
+        AbstractEvent e = new ActionEvent(frame, boat, a);
         contentHandler.animation.addEvent(e);
     }
 

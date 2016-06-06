@@ -1,4 +1,4 @@
-package even.rrsquiz.xml.parsers;
+package even.rrs.xml.parsers;
 
 import org.xml.sax.Attributes;
 

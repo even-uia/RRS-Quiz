@@ -1,14 +1,14 @@
 package even.rrsquiz.animation.event;
 
 import even.rrsquiz.animation.action.AbstractAction;
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.boat.Sailboat;
 
 /**
  *
  * @author even
  */
-public class ActionEvent extends Event
+public class ActionEvent extends AbstractEvent
 {
 
     private AbstractAction action;
@@ -25,6 +25,6 @@ public class ActionEvent extends Event
     }
 
     public String toString() {
-        return String.format("ActionEvent[%d;%s]", frame, action.toString());
+        return String.format("ActionEvent[%d;%s]", time, action.toString());
     }
 }

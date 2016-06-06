@@ -21,8 +21,8 @@ public class Animation
 
     private List<Actor> actors;
     private List<Drawable> visibleItems;
-    private ArrayList<Event> events;
-    private PriorityQueue<Event> eventQueue;
+    private ArrayList<AbstractEvent> events;
+    private PriorityQueue<AbstractEvent> eventQueue;
 
     private State state;
 
@@ -45,7 +45,7 @@ public class Animation
         state = State.PREPARING;
     }
 
-    public void addEvent(Event e) {
+    public void addEvent(AbstractEvent e) {
         events.add(e);
     }
 
@@ -91,8 +91,8 @@ public class Animation
             if (curFrame >= maxFrame) state = State.FINISHED;
 
 //            System.out.println("Frame " + curFrame + " ==================");
-            while (!eventQueue.isEmpty() && eventQueue.peek().getFrame() == curFrame) {
-                Event e = eventQueue.poll();
+            while (!eventQueue.isEmpty() && eventQueue.peek().getTime() == curFrame) {
+                AbstractEvent e = eventQueue.poll();
                 e.happen();
             }
 

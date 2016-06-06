@@ -6,7 +6,7 @@
 package even.rrsquiz.parser.tagparsers;
 
 import even.rrsquiz.animation.Actor;
-import even.rrsquiz.animation.Event;
+import even.rrsquiz.animation.AbstractEvent;
 import even.rrsquiz.animation.event.HailEvent;
 import even.rrsquiz.parser.Attribute;
 import even.rrsquiz.parser.ProblemContentHandler;
@@ -33,9 +33,9 @@ public class HailParser extends AbstractTagParser
         else if (contentHandler.sailBoat != null)
             boat = contentHandler.sailBoat;
         else throw new IllegalStateException("Hail must be made from a boat");
-        Event startHail = new HailEvent(frame, boat, hail, duration);
+        AbstractEvent startHail = new HailEvent(frame, boat, hail, duration);
         contentHandler.animation.addEvent(startHail);;
-        Event endHail = new HailEvent(frame + duration, boat, null, 0);
+        AbstractEvent endHail = new HailEvent(frame + duration, boat, null, 0);
         contentHandler.animation.addEvent(endHail);
     }
 
