@@ -1,8 +1,8 @@
 package even.rrs.render;
 
 import java.awt.Color;
-import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Path2D;
 
 
 /**
@@ -11,14 +11,11 @@ import java.awt.Stroke;
  */
 public interface Renderable
 {
-    Shape getShape();
-
+    Path2D.Double getPath();
 
     Color getColor();
 
-
     Color getFillColor();
-
 
     Stroke getStroke();
 

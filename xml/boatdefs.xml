@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <boatdefs xmlns="boatdef"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="boatdef boatdef.xsd">
+          xsi:schemaLocation="boatdef file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdef.xsd">
 
 
   <boattype name="skiff">
@@ -13,20 +13,26 @@
   <hull id="skiffhull" beam="3" length="5">
     <start x="0" y="2.5"/>
     <line x="0.6" y="0"/>
-    <line x="1.5" y="0.3" />
-    <line x="1.5" y="5"/>
-<!--    <line x="0.6" y="4.8"/>-->
-    <line x="0" y="4.8"/>
+    <line x="1.5" y="0" />
+    <line x="1.5" y="-2.4"/>
+    <line x="-1.5" y="-2.4"/>
+    <line x="-1.5" y="0" />
+    <line x="-0.6" y="0"/>
+    <line x="0" y="2.5"/>
   </hull>
 
+  <hull id="testhull" beam="2" length="6">
+    <start x="0" y="3"/>
+    <spline2 cx1="1" cy1="1" x="1" y="0" />
+    <line x="2" y="0"/>
+    <line x="2" y="-2" />
+  </hull>
 
-  <rig  id="skiffrig">
-    <forestay pos="2.5" render="false" id="forestay"/>
-      <mast pos="0" diameter="0.07" id="mast"/>
-    <sprit id="sprit" diameter="0.05" len="2" minangle="0" maxangle="0" attachedto="forestay"/>
-    <main chord="3" camber="0.06" attachedto="mast"/>
-      <jib chord="2" camber="0.06"/>
-      <gennaker chord="3" camber="0.15" attachedto="sprit"/>
+  <rig id="skiffrig" mastpos="0" forestaypos="2.5">
+    <spar type="bowsprit" len="2"/>
+    <sail type="main" chord="3" camber="0.06"/>
+    <sail type="jib" chord="2" camber="0.06"/>
+    <sail type="gennaker" chord="3" camber="0.15"/>
   </rig>
 
   <performance id="skiffperf" >

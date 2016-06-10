@@ -74,14 +74,12 @@
 
   <xs:attributeGroup name="spline2">
     <xs:attributeGroup ref="point"/>
-    <xs:attribute name="cx" type="xs:decimal" use="required"/>
-    <xs:attribute name="cy" type="xs:decimal" use="required"/>
+    <xs:attribute name="cx1" type="xs:decimal" use="required"/>
+    <xs:attribute name="cy1" type="xs:decimal" use="required"/>
   </xs:attributeGroup>
 
   <xs:attributeGroup name="spline3">
-    <xs:attributeGroup ref="point"/>
-    <xs:attribute name="cx1" type="xs:decimal" use="required"/>
-    <xs:attribute name="cy1" type="xs:decimal" use="required"/>
+    <xs:attributeGroup ref="spline2"/>
     <xs:attribute name="cx2" type="xs:decimal" use="required"/>
     <xs:attribute name="cy2" type="xs:decimal" use="required"/>
   </xs:attributeGroup>
@@ -94,41 +92,43 @@
 
   <xs:complexType name="rig">
     <xs:sequence>
-      <xs:element name="forestay" type="vertspar" minOccurs="0"/>
-      <xs:element name="mast" type="vertspar"/>
-      <xs:element name="pole" type="horspar" minOccurs="0"/>
-      <xs:element name="sprit" type="horspar" minOccurs="0"/>
-      <xs:element name="main" type="sail" minOccurs="0"/>
-      <xs:element name="jib" type="sail" minOccurs="0"/>
-      <xs:element name="spinnaker" type="sail" minOccurs="0"/>
-      <xs:element name="gennaker" type="sail" minOccurs="0"/>
+      <xs:element name="spar" type="spar" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="sail" type="sail" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="mastpos" type="xs:decimal" use="required"/>
+    <xs:attribute name="forestaypos" type="xs:decimal" />
   </xs:complexType>
 
-  <xs:complexType name="vertspar">
-    <xs:attribute name="id" type="xs:ID"/>
-    <xs:attribute name="pos" type="xs:decimal"/>
-    <xs:attribute name="diameter" type="xs:decimal"/>
-    <xs:attribute name="render" type="xs:boolean"  use="optional" default="true"/>
-  </xs:complexType>
-
-  <xs:complexType name="horspar">
-    <xs:attribute name="id" type="xs:ID"/>
+  <xs:complexType name="spar">
+    <xs:attribute name="type" type="spartype"/>
     <xs:attribute name="len" type="xs:decimal"/>
-    <xs:attribute name="diameter" type="xs:decimal"/>
     <xs:attribute name="minangle" type="xs:decimal"/>
     <xs:attribute name="maxangle" type="xs:decimal"/>
-    <xs:attribute name="attachedto" type="xs:IDREF"/>
-    <xs:attribute name="render" type="xs:boolean"/>
   </xs:complexType>
 
+  <xs:simpleType name="spartype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mainboom"/>
+      <xs:enumeration value="spinpole"/>
+      <xs:enumeration value="bowsprit"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="sail">
-    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="type" type="sailtype"/>
     <xs:attribute name="chord" type="xs:decimal"/>
     <xs:attribute name="camber" type="xs:decimal"/>
-    <xs:attribute name="attachedto" type="xs:IDREF"/>
   </xs:complexType>
+
+  <xs:simpleType name="sailtype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="main"/>
+      <xs:enumeration value="jib"/>
+      <xs:enumeration value="spinnaker"/>
+      <xs:enumeration value="gennaker"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <!-- performance -->
   <xs:complexType name="perfref">

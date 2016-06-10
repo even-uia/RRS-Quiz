@@ -10,12 +10,13 @@
             <file>file:/C:/Users/even/Prosjekter/RuleQuiz2/src/even/rrs/animation/SailBoat.java</file>
         </group>
         <group name="RRS">
-            <file>file:/C:/Prosjekter/RuleQuiz2/xml/boatdef.xsd</file>
-            <file>file:/C:/Prosjekter/RuleQuiz2/xml/boatdefs.xml</file>
-            <file>file:/C:/Prosjekter/RuleQuiz2/src/even/rrsquiz/render/Scene.java</file>
-            <file>file:/C:/Prosjekter/RuleQuiz2/src/even/rrsquiz/render/Renderable.java</file>
-            <file>file:/C:/Prosjekter/RuleQuiz2/src/even/rrsquiz/render/Canvas.java</file>
-            <file>file:/C:/Prosjekter/RuleQuiz2/src/even/rrsquiz/gui/Canvas.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/Rig.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/AnimationManager.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/BoatType.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdef.xsd</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/PerformanceData.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdefs.xml</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/xml/parsers/BoatFactory.java</file>
         </group>
     </open-files>
 </project-private>
