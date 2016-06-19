@@ -139,7 +139,7 @@ public enum PerformanceProfile
 //        double fd = getDrag(nd.getSpd());
 //        double totalForce = ff - fd;
 //
-//        System.out.format("c=%.0f v=%.2f ff=%.2f fd=%.2f ft=%.2f\n",
+//        // System.out.format("c=%.0f v=%.2f ff=%.2f fd=%.2f ft=%.2f\n",
 //                          Math.toDegrees(c), v,
 //                          ff, fd, totalForce);
 //        double a = totalForce / mass;

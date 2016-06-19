@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Scene
 {
     Dimension dim;
-    ArrayList<Renderable> shapes;
+    ArrayList<SceneElement> items;
     Color background = Color.BLUE;
     Color fill = Color.RED;
     Color fg = Color.BLACK;
@@ -21,34 +21,27 @@ public class Scene
 
     public Scene(Dimension dim) {
         this.dim = dim;
+        items = new ArrayList<>();
     }
 
     public Dimension getDimension() {
         return dim;
     }
 
-    public void addShape(Renderable shape) {
-        shapes.add(shape);
+    public void addItem(SceneElement shape) {
+        items.add(shape);
     }
 
-    public ArrayList<Renderable> getShapes() {
-        return shapes;
+    public ArrayList<SceneElement> getItems() {
+        return items;
     }
 
     public Color getBackground() {
         return background;
     }
 
-    public Color getDefaultColor() {
-        return fg;
+    @Override
+    public String toString() {
+        return "Scene{" + "dim=" + dim + ", items=" + items + " fill=" + fill + ", fg=" + fg + ", stroke=" + stroke + '}';
     }
-
-    public Color getDefaultFill() {
-        return fill;
-    }
-
-    public BasicStroke getDefaultStroke() {
-        return stroke;
-    }
-
 }

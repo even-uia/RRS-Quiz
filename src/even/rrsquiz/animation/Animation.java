@@ -90,7 +90,7 @@ public class Animation
             curFrame++;
             if (curFrame >= maxFrame) state = State.FINISHED;
 
-//            System.out.println("Frame " + curFrame + " ==================");
+//            // System.out.println("Frame " + curFrame + " ==================");
             while (!eventQueue.isEmpty() && eventQueue.peek().getTime() == curFrame) {
                 AbstractEvent e = eventQueue.poll();
                 e.happen();

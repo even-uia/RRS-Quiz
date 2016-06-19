@@ -4,8 +4,8 @@
           xsi:schemaLocation="boatdef file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdef.xsd">
 
 
-  <boattype name="skiff">
-    <hullref id="skiffhull"/>
+  <boattype id="skiff">
+    <hullref id="skiffhull" />
     <rigref id="skiffrig" />
     <perfref id="skiffperf"/>
   </boattype>
@@ -30,9 +30,9 @@
 
   <rig id="skiffrig" mastpos="0" forestaypos="2.5">
     <spar type="bowsprit" len="2"/>
-    <sail type="main" chord="3" camber="0.06"/>
-    <sail type="jib" chord="2" camber="0.06"/>
-    <sail type="gennaker" chord="3" camber="0.15"/>
+    <sail type="main" chord="3" camber="0.06" minangle="5" maxangle="60" />
+    <sail type="jib" chord="2" camber="0.06" minangle="10" maxangle="60" />
+    <sail type="gennaker" chord="3" camber="0.15" minangle="20" maxangle="60" mintwa="140"/>
   </rig>
 
   <performance id="skiffperf" >

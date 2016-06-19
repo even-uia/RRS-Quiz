@@ -11,12 +11,15 @@
         </group>
         <group name="RRS">
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/Rig.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/AnimationManager.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/BoatType.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/render/SceneElement.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/xml/parsers/BoatBuilderFactory.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/gui/AnimationPanel.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/render/Drawable.java</file>
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdef.xsd</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boatdef/PerformanceData.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/render/AnimationRenderer.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Boat.java</file>
+            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Animation.java</file>
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdefs.xml</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/xml/parsers/BoatFactory.java</file>
         </group>
     </open-files>
 </project-private>

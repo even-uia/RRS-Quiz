@@ -2,7 +2,6 @@ package even.rrsquiz.gui;
 
 import even.rrsquiz.Problem;
 import even.rrsquiz.animation.Animation;
-import even.rrsquiz.parser.Parser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -28,6 +27,7 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
+
 
 /**
  *
@@ -70,7 +70,7 @@ public class RrsQuizWindow extends JFrame
 
     @Override
     public void setSize(Dimension d) {
-        System.out.println("Changig size");
+        // System.out.println("Changig size");
         setSize(d.width, d.height);
     }
 
@@ -225,20 +225,20 @@ public class RrsQuizWindow extends JFrame
     }
 
     private void loadFile(File file) {
-        Parser p = new Parser(file);
-        if (p.ready) {
-            try {
-                problem = p.parse();
-                animation = problem.getAnimation();
-                animation.setup();
-                animation.reset();
-                canvas.setAnimation(animation);
-                pack();
-            }
-            catch (ParserConfigurationException | SAXException | IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        Parser p = new Parser(file);
+//        if (p.ready) {
+//            try {
+//                problem = p.parse();
+//                animation = problem.getAnimation();
+//                animation.setup();
+//                animation.reset();
+//                //               canvas.setAnimation(animation);
+//                pack();
+//            }
+//            catch (ParserConfigurationException | SAXException | IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     private void setEnabledActions(boolean load,

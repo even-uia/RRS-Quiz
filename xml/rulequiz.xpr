@@ -10,5 +10,6 @@
         <file name="penalty.xml"/>
         <file name="rulequiz.xsd"/>
         <file name="start.xml"/>
+        <file name="testanim.xml"/>
     </projectTree>
 </project>

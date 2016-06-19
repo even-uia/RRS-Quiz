@@ -10,6 +10,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.util.EnumSet;
 
+
 /**
  *
  * @author even
@@ -28,7 +29,7 @@ public class StartBoat implements Drawable, Actor
 
     public StartBoat() {
         name = "Startboat";
-        hullShape = BoatType.BIG_KEELBOAT.hullShape;
+//        hullShape = BoatType.BIG_KEELBOAT.hullShape;
         colour = Color.GRAY;
         signals = EnumSet.noneOf(Flag.class);
     }

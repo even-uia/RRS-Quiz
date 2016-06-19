@@ -52,7 +52,7 @@ public class Physics
 
         for (double x = 30; x < 181; x += 10) {
             double xx = physics.getForwardForce(x);
-            System.out.format("x = %8.2f, x' = %8.2f\n", x, xx);
+            // System.out.format("x = %8.2f, x' = %8.2f\n", x, xx);
         }
     }
 }

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="animation" xmlns="animation" elementFormDefault="qualified">
+
+  <xs:element name="animation" type="Animation">
+    <xs:annotation>
+      <xs:documentation>Top level element for animation file</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+
+
+  <!-- ===== Element types, ordered by first use ===== -->
+
+  <xs:complexType name="Animation">
+    <xs:annotation>
+      <xs:documentation>Type def for the top level element for animation file</xs:documentation>
+    </xs:annotation>
+
+
+    <xs:sequence>
+      <xs:element name="size" type="Size"/>
+      <xs:element name="wind" type="Position"/>
+      <xs:element name="mark" type="Mark" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="startboat" type="StartBoat" minOccurs="0"/> 
+      <xs:element name="boat" type="SailBoat" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="Size">
+    <xs:attribute name="width" type="xs:positiveInteger"/>
+    <xs:attribute name="height" type="xs:positiveInteger"/>
+    <xs:attribute name="duration" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="Position">
+    <xs:attributeGroup ref="Pos"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="Mark">
+    <xs:attributeGroup ref="Mark"/>
+    <xs:attribute name="size" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+
+
+  <!-- ===== StartBoat ===== -->
+
+
+  <xs:complexType name="StartBoat">
+    <xs:sequence>
+      <xs:element name="hull" type="Hull"/>
+      <xs:element name="mark" type="Mark" minOccurs="0"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="signal" type="Signal"/>
+        <xs:element name="hail" type="Hail"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="Boat"/>
+  </xs:complexType>
+
+  <xs:complexType name="Hull">
+    <xs:attribute name="ref" type="xs:IDREF"/>
+  </xs:complexType>
+
+  <xs:complexType name="Signal">
+    <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="up" type="Flag"/>
+    <xs:attribute name="down" type="Flag"/>
+  </xs:complexType>
+
+  <xs:simpleType name="FlagList">
+    <xs:list itemType="Flag"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="Flag">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLASSFLAG"/>
+      <xs:enumeration value="P"/>
+      <xs:enumeration value="I"/>
+      <xs:enumeration value="Z"/>
+      <xs:enumeration value="BLACKFLAG"/>
+      <xs:enumeration value="IND_RECALL"/>
+      <xs:enumeration value="GEN_RECALL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <!-- ===== Sailboats ===== -->
+
+  <xs:complexType name="SailBoat">
+    <xs:sequence>
+      <xs:element name="actions" type="Actions"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="Boat"/>
+    <xs:attribute name="type" type="xs:IDREF"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="Actions">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="turn" type="Turn"/>
+      <xs:element name="tack" type="TwoPartTurn"/>
+      <xs:element name="gybe" type="TwoPartTurn"/>
+      <xs:element name="trim" type="Trim"/>
+      <xs:element name="hail" type="Hail"/>
+    </xs:choice>
+  </xs:complexType>
+
+
+  <xs:complexType name="Turn">
+    <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
+     <xs:attribute name="turnrate" type="Turnrate"/>
+ <xs:attributeGroup ref="Heading"></xs:attributeGroup> </xs:complexType>
+
+
+  <xs:complexType name="TwoPartTurn">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="turn1" type="Turn"/>
+      <xs:element name="turn2" type="Turn"/>
+    </xs:choice>
+    <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="Trim">
+    <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="auto" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="Hail">
+    <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="hail" type="xs:string" use="required"/>
+    <xs:attribute name="duration" type="xs:nonNegativeInteger" default="10"/>
+  </xs:complexType>
+
+
+  <xs:simpleType name="Turnrate">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SLOW"/>
+      <xs:enumeration value="NORMAL"/>
+      <xs:enumeration value="MAX"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!-- ===== Attribute groups ordered by first use/ref ===== -->
+
+  <xs:attributeGroup name="Pos">
+    <xs:attribute name="x" type="xs:decimal"/>
+    <xs:attribute name="y" type="xs:decimal"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="Heading">
+    <xs:attribute name="twa" type="xs:positiveInteger"/>
+    <xs:attribute name="tack" type="Tack"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="Mark">
+    <xs:attributeGroup ref="Pos"/>
+    <xs:attribute name="colour" type="xs:hexBinary" use="optional" default="FFAA55"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="Boat">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attributeGroup ref="NavData"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="NavData">
+    <xs:attributeGroup ref="Pos"/>
+    <xs:attributeGroup ref="Heading"/>
+    <xs:attribute name="spd" type="xs:decimal"/>
+  </xs:attributeGroup>
+
+  <xs:simpleType name="Tack">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PORT"/>
+      <xs:enumeration value="STBD"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
+
+

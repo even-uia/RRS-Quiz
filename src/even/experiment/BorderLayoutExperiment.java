@@ -55,7 +55,7 @@ public class BorderLayoutExperiment extends JFrame
             {
                 @Override
                 public void componentResized(ComponentEvent e) {
-                    System.out.println("Canvas resized to " + getSize());
+                    // System.out.println("Canvas resized to " + getSize());
                 }
             });
         }
@@ -70,12 +70,12 @@ public class BorderLayoutExperiment extends JFrame
         private void draw(Graphics2D g2) {
             Dimension size = getPreferredSize();
             Rectangle clip = g2.getClipBounds();
-            System.out.format("Size %d %d\n", size.width, size.height);
-            System.out.format("Clip %d %d %d %d\n", clip.x, clip.y, clip.width, clip.height);
+            // System.out.format("Size %d %d\n", size.width, size.height);
+            // System.out.format("Clip %d %d %d %d\n", clip.x, clip.y, clip.width, clip.height);
             float xScale = 1.0f * clip.width / size.width;
             float yScale = 1.0f * clip.height / size.height;
             float scale = Math.min(xScale, yScale);
-            System.out.println("Scale :" + scale);
+            // System.out.println("Scale :" + scale);
 
             g2.setColor(Color.BLUE);
             g2.fill(clip);

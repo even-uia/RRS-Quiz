@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<animation xmlns="animation"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="animation file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/animation.xsd">
+
+  <size width="20" height="20" duration="15"/>
+  <wind x="0" y="0"/>
+  
+  <boat name="Test" x="10" y="10" tack="PORT" twa="45" spd="0">
+    <actions>
+      
+    </actions>
+  </boat>
+  
+  
+</animation>

@@ -29,7 +29,7 @@
         <xs:element name="perfref" type="perfref"/>
       </xs:choice>
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="id" type="xs:ID"/>
   </xs:complexType>
 
 
@@ -119,6 +119,9 @@
     <xs:attribute name="type" type="sailtype"/>
     <xs:attribute name="chord" type="xs:decimal"/>
     <xs:attribute name="camber" type="xs:decimal"/>
+    <xs:attribute name="minangle" type="xs:decimal"/>
+    <xs:attribute name="maxangle" type="xs:decimal"/>
+    <xs:attribute name="mintwa" type="xs:decimal"/>
   </xs:complexType>
 
   <xs:simpleType name="sailtype">
