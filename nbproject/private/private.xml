@@ -2,7 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group name="HRMS">
             <file>file:/C:/Users/even/Prosjekter/RuleQuiz2/src/even/rrs/animation/Boat.java</file>
             <file>file:/C:/Users/even/Prosjekter/RuleQuiz2/src/even/rrs/animation/Navigator.java</file>
@@ -20,6 +19,17 @@
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Boat.java</file>
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Animation.java</file>
             <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/boatdefs.xml</file>
+        </group>
+        <group>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/BoatBuilder.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/boatdef/Hull.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/boatdef/Sail.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/boatdef/Rig.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/xml/boatdef.xsd</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/Boat.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/Navigator.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/Animation.java</file>
+            <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/render/AnimationRenderer.java</file>
         </group>
     </open-files>
 </project-private>
