@@ -11,14 +11,14 @@
   </boattype>
 
   <hull id="skiffhull" beam="3" length="5">
-    <start x="0" y="2.5"/>
+    <start x="0" y="-2.5"/>
     <line x="0.6" y="0"/>
     <line x="1.5" y="0" />
-    <line x="1.5" y="-2.4"/>
-    <line x="-1.5" y="-2.4"/>
+    <line x="1.5" y="2.4"/>
+    <line x="-1.5" y="2.4"/>
     <line x="-1.5" y="0" />
     <line x="-0.6" y="0"/>
-    <line x="0" y="2.5"/>
+    <line x="0" y="-2.5"/>
   </hull>
 
   <hull id="testhull" beam="2" length="6">
@@ -28,8 +28,8 @@
     <line x="2" y="-2" />
   </hull>
 
-  <rig id="skiffrig" mastpos="0" forestaypos="2.5">
-    <spar type="bowsprit" len="2"/>
+  <rig id="skiffrig" mastpos="0" forestaypos="-2.5">
+    <spinpole length="2"/>
     <sail type="main" chord="3" camber="0.06" minangle="5" maxangle="60" />
     <sail type="jib" chord="2" camber="0.06" minangle="10" maxangle="60" />
     <sail type="gennaker" chord="3" camber="0.15" minangle="20" maxangle="60" mintwa="140"/>

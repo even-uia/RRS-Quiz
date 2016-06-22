@@ -92,28 +92,18 @@
 
   <xs:complexType name="rig">
     <xs:sequence>
-      <xs:element name="spar" type="spar" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="sail" type="sail" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="spinpole" type="SpinPole" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="sail" type="sail" minOccurs="0" maxOccurs="3"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID"/>
     <xs:attribute name="mastpos" type="xs:decimal" use="required"/>
     <xs:attribute name="forestaypos" type="xs:decimal" />
+    <xs:attribute name="length" type="xs:decimal" />
   </xs:complexType>
 
-  <xs:complexType name="spar">
-    <xs:attribute name="type" type="spartype"/>
-    <xs:attribute name="len" type="xs:decimal"/>
-    <xs:attribute name="minangle" type="xs:decimal"/>
-    <xs:attribute name="maxangle" type="xs:decimal"/>
+  <xs:complexType name="SpinPole">
+    <xs:attribute name="length" type="xs:decimal"/>
   </xs:complexType>
-
-  <xs:simpleType name="spartype">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="mainboom"/>
-      <xs:enumeration value="spinpole"/>
-      <xs:enumeration value="bowsprit"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:complexType name="sail">
     <xs:attribute name="type" type="sailtype"/>
