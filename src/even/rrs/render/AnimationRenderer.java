@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JComponent;
 
 
+
 /**
  *
  * @author even
@@ -68,13 +69,9 @@ public class AnimationRenderer extends JComponent
     }
 
     private AffineTransform getTransform(Dimension realSize, Rectangle window) {
-        // System.out.format("Size %d %d\n", realSize.width, realSize.height);
-        // System.out.format("Clip %d %d %d %d\n", window.x, window.y, window.width, window.height);
-
         float xScale = 1.0f * window.width / realSize.width;
         float yScale = 1.0f * window.height / realSize.height;
         float scale = Math.min(xScale, yScale);
-        // System.out.println("Scale :" + scale);
         return AffineTransform.getScaleInstance(scale, scale);
     }
 

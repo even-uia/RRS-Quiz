@@ -4,12 +4,14 @@ import even.rrs.animation.Boat;
 import java.awt.Color;
 
 
+
 /**
  *
  * @author even
  */
 public class BoatType
 {
+
     String id;
     Hull hull;
     Rig rig;
@@ -60,17 +62,6 @@ public class BoatType
         return id;
     }
 
-//    public String getHullId() {
-//        return hullId;
-//    }
-//
-//    public String getRigId() {
-//        return rigId;
-//    }
-//
-//    public String getPerfId() {
-//        return perfId;
-//    }
     public Hull getHull() {
         return hull;
     }

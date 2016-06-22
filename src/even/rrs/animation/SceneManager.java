@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  *
  * @author even
  */
 public class SceneManager
 {
+
     List<Drawable> drawableItems;
 
     public SceneManager(Dimension dim) {
@@ -24,9 +26,9 @@ public class SceneManager
         drawableItems.add(d);
     }
 
-    public Scene makeScene(Dimension dim) {
+    public Scene makeScene(Dimension dim, int time) {
         System.out.println("Creating scene items");
-        Scene scene = new Scene(dim);
+        Scene scene = new Scene(dim, time);
 
         for (Drawable d : drawableItems) {
             List<SceneElement> items = d.getSceneItems();

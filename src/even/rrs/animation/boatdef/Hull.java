@@ -1,7 +1,7 @@
 package even.rrs.animation.boatdef;
 
 import java.awt.Shape;
-import java.awt.geom.Path2D;
+
 
 
 /**
@@ -10,6 +10,7 @@ import java.awt.geom.Path2D;
  */
 public class Hull
 {
+
     String id;
     double beam;
     double length;
@@ -21,9 +22,9 @@ public class Hull
         this.length = length;
     }
 
-    public void setPath(Shape path) {
+    public void setShape(Shape path) {
         this.path = path;
-        // System.out.println("Hull.setPath < -- " + path);
+        System.out.println("Hull.setShape < -- " + path);
     }
 
     public String getId() {
@@ -38,8 +39,8 @@ public class Hull
         return length;
     }
 
-    public Shape getPath() {
-        // System.out.println("Hull.getPath() " + id + " " + path);
+    public Shape getShape() {
+        System.out.println("Hull.getPath() " + id + " " + path);
         return path;
     }
 

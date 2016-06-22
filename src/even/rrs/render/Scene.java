@@ -6,21 +6,25 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 
+
 /**
  *
  * @author even
  */
 public class Scene
 {
+
     Dimension dim;
+    int time;
     ArrayList<SceneElement> items;
     Color background = Color.BLUE;
     Color fill = Color.RED;
     Color fg = Color.BLACK;
     BasicStroke stroke = new BasicStroke(1);
 
-    public Scene(Dimension dim) {
+    public Scene(Dimension dim, int time) {
         this.dim = dim;
+        this.time = time;
         items = new ArrayList<>();
     }
 
@@ -42,6 +46,7 @@ public class Scene
 
     @Override
     public String toString() {
-        return "Scene{" + "dim=" + dim + ", items=" + items + " fill=" + fill + ", fg=" + fg + ", stroke=" + stroke + '}';
+        return "Scene{" + "dim=" + dim + ", items=" + items + " fill=" + fill + ", fg=" + fg + ", stroke=" + stroke +
+                '}';
     }
 }

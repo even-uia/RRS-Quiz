@@ -12,12 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  *
  * @author even
  */
 public class Boat implements Drawable
 {
+
     BoatType type;
     String name;
     Color hullColour;
@@ -34,11 +36,12 @@ public class Boat implements Drawable
 
         AffineTransform transform = nav.getHullTransform();
         Hull hull = type.getHull();
-        Shape hullShape = transform.createTransformedShape(hull.getPath());
+        Shape hullShape = transform.createTransformedShape(hull.getShape());
         shapes.add(new SceneElement("hull", hullShape, null, hullColour, null));
 
         Rig rig = type.getRig();
-        List<SceneElement> rigShapes = rig.getSceneItems();
+        List<SceneElement> rigShapes = rig.getSceneItems(Navigator nav
+        );
         for (SceneElement se : rigShapes) {
             se.setShape(transform.createTransformedShape(se.getShape()));
             shapes.add(se);

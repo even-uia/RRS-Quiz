@@ -2,22 +2,15 @@ package even.rrs.animation;
 
 import even.rrs.render.AnimationRenderer;
 import even.rrs.render.Scene;
-import even.rrs.xml.parsers.BoatBuilderFactory;
 import static even.rrsquiz.animation.Animation.FRAMERATE;
 import even.util.EventManager;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Timer;
 import org.jdom2.Document;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.input.sax.XMLReaderJDOMFactory;
-import org.jdom2.input.sax.XMLReaderXSDFactory;
+
 
 
 /**
@@ -27,9 +20,10 @@ import org.jdom2.input.sax.XMLReaderXSDFactory;
  */
 public class Animation
 {
+
     public static final String ANIMATION_SCHEMA = "";
 
-    BoatBuilder boatFactory;
+    BoatBuilder boatBuilder;
     EventManager eventMgr;
     ActorManager actorMgr;
 
@@ -47,7 +41,8 @@ public class Animation
     public Animation(File animationXmlFile,
                      AnimationRenderer renderer,
                      Action stepAction) {
-        boatFactory = BoatBuilderFactory.getInstance().getBoatBuilder();
+        boatBuilder = new BoatBuilder();
+        boatBuilder.loadDesigns(new File("xml", "boatdefs.xml"));
         eventMgr = new EventManager();
         actorMgr = new ActorManager();
         // // System.out.println("dim (in constructor =" + dim);
@@ -101,7 +96,7 @@ public class Animation
             System.out.println(" time is now " + time);
             actorMgr.act(time);
 
-            Scene scene = sceneManager.makeScene(dim);
+            Scene scene = sceneManager.makeScene(dim, time);
             renderer.setScene(scene);
 
             System.out.println("===============================\n== End callback\n");
@@ -145,11 +140,12 @@ public class Animation
         state = State.PAUSED;
 
         // DEBUG
-        Boat boat = boatFactory.buildBoat("skiff", "Skiff", Color.LIGHT_GRAY);
+        Boat boat = boatBuilder.buildBoat("skiff", "Skiff", Color.RED);
         Navigator nav = new Navigator(boat);
         actorMgr.addActor(nav);
         sceneManager.add(boat);
     }
+
 
 
     public static enum State
