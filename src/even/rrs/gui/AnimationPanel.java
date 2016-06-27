@@ -1,6 +1,7 @@
 package even.rrs.gui;
 
 import even.rrs.animation.Animation;
+import even.rrs.animation.XmlParser;
 import even.rrs.render.AnimationRenderer;
 import even.swingutil.MainWindow;
 import java.awt.BorderLayout;
@@ -34,10 +35,12 @@ public class AnimationPanel extends JPanel
     public AnimationPanel() {
         super(new BorderLayout(5, 5));
         buildGui();
+        animation = new Animation();
     }
 
     public void setAnimation(File animationXmlFile) {
-        this.animation = new Animation(animationXmlFile, renderer, stepTime);
+        animation.setRenderer(renderer);
+        animation.loadAnimation(animationXmlFile);
     }
 
     // ////////////////////////////////////
@@ -66,6 +69,7 @@ public class AnimationPanel extends JPanel
             public void actionPerformed(ActionEvent e) {
                 System.out.println("toggle animation");
                 if (null != animation) animation.toggleRunning();
+                setEnabledActions();
             }
         };
 
@@ -77,6 +81,7 @@ public class AnimationPanel extends JPanel
                 System.out.println("\n*********************************");
                 System.out.println("*** Step animation one time tick!");
                 if (null != animation) animation.stepTime();
+                setEnabledActions();
             }
         };
 
@@ -86,24 +91,47 @@ public class AnimationPanel extends JPanel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (animation != null) animation.restart();
+                setEnabledActions();
             }
 
         };
     }
 
-    private void setEnabledActions(boolean toggleRun,
-                                   boolean stop,
-                                   boolean step,
-                                   boolean restart) {
-        this.toggleStartStop.setEnabled(toggleRun);
-        this.stepTime.setEnabled(step);
-        this.restart.setEnabled(restart);
+    private void setEnabledActions() {
+        if (animation == null) {
+            this.toggleStartStop.setEnabled(false);
+            this.stepTime.setEnabled(false);
+            this.restart.setEnabled(false);
+            return;
+        }
+        Animation.State s = animation.getState();
+        switch (s) {
+        case EMPTY:
+        // deliberate fallthrough
+        case PAUSED:
+            this.toggleStartStop.setEnabled(true);
+            this.stepTime.setEnabled(true);
+            this.restart.setEnabled(true);
+            break;
+        case RUNNING:
+            this.toggleStartStop.setEnabled(true);
+            this.stepTime.setEnabled(false);
+            this.restart.setEnabled(false);
+            break;
+        case FINISHED:
+            this.toggleStartStop.setEnabled(false);
+            this.stepTime.setEnabled(false);
+            this.restart.setEnabled(false);
+            break;
+        default:
+            System.out.println("hmmm");
+        }
     }
 
     public static void main(String[] args) {
         AnimationPanel panel = new AnimationPanel();
-        MainWindow window = new MainWindow("AnimTest", panel);
-        panel.setAnimation(new File("testanim.xml"));
+        MainWindow window = new MainWindow("Start", panel);
+        panel.setAnimation(new File("xml", "start.xml"));
         window.pack();
         window.setVisible(true);
     }

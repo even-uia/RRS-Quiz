@@ -1,16 +1,22 @@
 package even.rrs.animation;
 
+import even.rrs.animation.boat.NavData;
+import even.rrs.animation.boat.Tack;
+import even.rrs.animation.boatdef.Hull;
 import even.rrs.render.AnimationRenderer;
 import even.rrs.render.Scene;
-import static even.rrsquiz.animation.Animation.FRAMERATE;
 import even.util.EventManager;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.List;
+import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Timer;
 import org.jdom2.Document;
-
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 
 
 /**
@@ -18,10 +24,12 @@ import org.jdom2.Document;
  *
  * @author even
  */
-public class Animation
+public class Animation implements XmlNameConstants
 {
+    public static final int FRAMERATE = 10;
+//    public static final String ANIMATION_SCHEMA = "animation.xsd";
 
-    public static final String ANIMATION_SCHEMA = "";
+    XmlParser parser;
 
     BoatBuilder boatBuilder;
     EventManager eventMgr;
@@ -36,26 +44,115 @@ public class Animation
     Timer timer;
     Action stepAction;
 
+    Namespace namespace;
     File animationFile;
 
-    public Animation(File animationXmlFile,
-                     AnimationRenderer renderer,
-                     Action stepAction) {
+    public Animation() {
         boatBuilder = new BoatBuilder();
-        boatBuilder.loadDesigns(new File("xml", "boatdefs.xml"));
         eventMgr = new EventManager();
         actorMgr = new ActorManager();
-        // // System.out.println("dim (in constructor =" + dim);
         sceneManager = new SceneManager(dim);
-        this.renderer = renderer;
-        this.animationFile = animationXmlFile;
-        this.stepAction = stepAction;
-        loadAnimation(animationXmlFile);
-
+        parser = new XmlParser();
+        stepAction = new AbstractAction("Step")
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stepTime();
+            }
+        };
+        state = State.EMPTY;
     }
 
-    // /////////////////////////////////////
-    // State changing methods
+    public void setRenderer(AnimationRenderer renderer) {
+        this.renderer = renderer;
+    }
+
+    //////////////////////////////////////////////////
+    // Loading animation from xml file
+    //
+    public void loadAnimation(String filename) {
+        Document doc = parser.parseXmlFile(filename, ANIMATION_XSD_FILENAME, "animation");
+        buildAnimation(doc);
+    }
+
+    public void loadAnimation(File xmlFile) {
+        Document doc = parser.parseXmlFile(xmlFile,
+                                           new File("xml", ANIMATION_XSD_FILENAME));
+        buildAnimation(doc);
+    }
+
+    private void buildAnimation(Document doc) {
+        Element root = doc.getRootElement();
+        namespace = root.getNamespace();
+        int width = parser.getIntValue(root, WIDTH);
+        int height = parser.getIntValue(root, HEIGHT);
+        dim = new Dimension(width, height);
+
+        loadBoatData(root);
+        // TODO wind arrow
+        loadMarks(root);
+        loadStartboat(root);
+    }
+
+    private void loadBoatData(Element root) {
+        Element bde = root.getChild(BOATDATA, namespace);
+        String boatFilename = bde.getAttributeValue(FILE);
+        boatBuilder.parser = this.parser;
+        boatBuilder.loadFile(boatFilename);
+    }
+
+    private void loadMarks(Element root) {
+        List<Element> markElts = root.getChildren(MARK, namespace);
+        for (Element me : markElts) {
+            loadMark(me);
+        }
+    }
+
+    private Mark loadMark(Element me) {
+        double x = parser.getDoubleValue(me, X);
+        double y = parser.getDoubleValue(me, Y);
+        double size = parser.getDoubleValue(me, SIZE);
+        Color colour = parser.getColourValue(me, COLOUR);
+        Mark mark = new Mark(x, y, size, colour);
+        sceneManager.add(mark);
+        return mark;
+    }
+
+    private void loadStartboat(Element root) {
+        Element sbe = root.getChild(STARTBOAT, namespace);
+        double x = parser.getDoubleValue(sbe, X);
+        double y = parser.getDoubleValue(sbe, Y);
+        double twa = parser.getDoubleValue(sbe, TWA);
+        Tack tack = Tack.valueOf(sbe.getAttributeValue(TACK));
+        NavData pos = new NavData(x, y, tack, twa);
+        Color colour = parser.getColourValue(sbe, COLOUR);
+        StartBoat startBoat = new StartBoat(pos, colour);
+        actorMgr.addActor(startBoat);
+        sceneManager.add(startBoat);
+        // todo - create startboat and starter
+
+        Element hr = sbe.getChild(HULLREF, namespace);
+        String hullId = hr.getAttributeValue(REF);
+        Hull hull = boatBuilder.hulls.get(hullId);
+        startBoat.setHull(hull);
+
+        Element sme = sbe.getChild(MARK, namespace);
+        if (sme != null) {
+            Mark mark = loadMark(sme);
+            startBoat.setMark(mark);
+        }
+
+        Element se = sbe.getChild(START, namespace);
+        if (se != null) {
+            int time = parser.getIntValue(se, TIME);
+            String prepFlag = se.getAttributeValue(PREPFLAG);
+            startBoat.setStart(time, prepFlag);
+        }
+    }
+
+// /////////////////////////////////////
+// State changing methods
+//
     /**
      * Start the animation. Creates a new timer which triggers the stepAction
      */
@@ -90,7 +187,8 @@ public class Animation
      */
     public void stepTime() {
         System.out.println("\n\n===============================\n== Start callback");
-        if (state == State.RUNNING) {
+        System.out.flush();
+        if (state != State.FINISHED) {
             System.out.print("tick...");
             int time = eventMgr.stepTime();
             System.out.println(" time is now " + time);
@@ -99,8 +197,9 @@ public class Animation
             Scene scene = sceneManager.makeScene(dim, time);
             renderer.setScene(scene);
 
-            System.out.println("===============================\n== End callback\n");
         }
+        System.out.println("===============================\n== End callback\n");
+        System.out.flush();
     }
 
     /**
@@ -108,26 +207,13 @@ public class Animation
      */
     public void restart() {
         if (timer == null && state == State.FINISHED) {
-            loadAnimation(animationFile);
+//            loadAnimation(animationFile);
             toggleRunning(); // start the animation
         }
     }
 
-    /**
-     * Parse and interpret scenario definition file
-     *
-     * @param animationXmlFile xml file
-     */
-    private void loadAnimation(File animationXmlFile) {
-//        try {
-//            XMLReaderJDOMFactory factory2 = new XMLReaderXSDFactory(ANIMATION_SCHEMA);
-//            SAXBuilder sb2 = new SAXBuilder(factory2);
-//            org.jdom2.Document doc = sb2.build(animationXmlFile);
-        setup(null); //(doc);
-//        }
-//        catch (JDOMException | IOException e) {
-//            e.printStackTrace();
-//        }
+    public State getState() {
+        return state;
     }
 
     /**
@@ -144,13 +230,13 @@ public class Animation
         Navigator nav = new Navigator(boat);
         actorMgr.addActor(nav);
         sceneManager.add(boat);
-    }
 
+    }
 
 
     public static enum State
     {
-        PAUSED, RUNNING, FINISHED;
+        EMPTY, PAUSED, RUNNING, FINISHED;
     }
 
 }

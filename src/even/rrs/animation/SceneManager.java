@@ -31,7 +31,7 @@ public class SceneManager
         Scene scene = new Scene(dim, time);
 
         for (Drawable d : drawableItems) {
-            List<SceneElement> items = d.getSceneItems();
+            List<SceneElement> items = d.getSceneElements();
             for (SceneElement i : items) {
                 System.out.println("Adding scene element " + i + " for " + d.getClass());
                 scene.addItem(i);

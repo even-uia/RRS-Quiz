@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface Drawable
 {
-    List<SceneElement> getSceneItems();
+    List<SceneElement> getSceneElements();
 
 }

@@ -7,30 +7,26 @@
     </xs:annotation>
   </xs:element>
 
-
-
   <!-- ===== Element types, ordered by first use ===== -->
 
   <xs:complexType name="Animation">
     <xs:annotation>
       <xs:documentation>Type def for the top level element for animation file</xs:documentation>
     </xs:annotation>
-
-
     <xs:sequence>
-      <xs:element name="size" type="Size"/>
+      <xs:element name="boatdata" type="BoatDefs" />
       <xs:element name="wind" type="Position"/>
       <xs:element name="mark" type="Mark" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="startboat" type="StartBoat" minOccurs="0"/> 
+      <xs:element name="startboat" type="StartBoat" minOccurs="0"/>
       <xs:element name="boat" type="SailBoat" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-  </xs:complexType>
-
-
-  <xs:complexType name="Size">
     <xs:attribute name="width" type="xs:positiveInteger"/>
     <xs:attribute name="height" type="xs:positiveInteger"/>
     <xs:attribute name="duration" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="BoatDefs">
+    <xs:attribute name="file" type="xs:string"/>
   </xs:complexType>
 
 
@@ -51,9 +47,10 @@
 
   <xs:complexType name="StartBoat">
     <xs:sequence>
-      <xs:element name="hull" type="Hull"/>
+      <xs:element name="hullref" type="HullRef"/>
       <xs:element name="mark" type="Mark" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="start" type="Start" minOccurs="0" maxOccurs="1" />
         <xs:element name="signal" type="Signal"/>
         <xs:element name="hail" type="Hail"/>
       </xs:choice>
@@ -61,8 +58,13 @@
     <xs:attributeGroup ref="Boat"/>
   </xs:complexType>
 
-  <xs:complexType name="Hull">
-    <xs:attribute name="ref" type="xs:IDREF"/>
+  <xs:complexType name="HullRef">
+    <xs:attribute name="ref" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Start">
+    <xs:attribute name="time" type="xs:integer"/>
+    <xs:attribute name="prepflag" type="Flag"/>
   </xs:complexType>
 
   <xs:complexType name="Signal">
@@ -86,8 +88,6 @@
       <xs:enumeration value="GEN_RECALL"/>
     </xs:restriction>
   </xs:simpleType>
-
-
 
   <!-- ===== Sailboats ===== -->
 
@@ -113,8 +113,9 @@
 
   <xs:complexType name="Turn">
     <xs:attribute name="time" type="xs:nonNegativeInteger" use="required"/>
-     <xs:attribute name="turnrate" type="Turnrate"/>
- <xs:attributeGroup ref="Heading"></xs:attributeGroup> </xs:complexType>
+    <xs:attribute name="turnrate" type="Turnrate"/>
+    <xs:attributeGroup ref="Heading"></xs:attributeGroup>
+  </xs:complexType>
 
 
   <xs:complexType name="TwoPartTurn">
@@ -156,7 +157,7 @@
   </xs:attributeGroup>
 
   <xs:attributeGroup name="Heading">
-    <xs:attribute name="twa" type="xs:positiveInteger"/>
+    <xs:attribute name="twa" type="xs:integer"/>
     <xs:attribute name="tack" type="Tack"/>
   </xs:attributeGroup>
 

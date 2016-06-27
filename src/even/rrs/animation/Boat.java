@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /**
  *
  * @author even
@@ -31,7 +30,7 @@ public class Boat implements Drawable
         this.hullColour = hullColour;
     }
 
-    public List<SceneElement> getSceneItems() {
+    public List<SceneElement> getSceneElements() {
         List<SceneElement> shapes = new ArrayList<>();
 
         AffineTransform transform = nav.getHullTransform();
@@ -40,13 +39,11 @@ public class Boat implements Drawable
         shapes.add(new SceneElement("hull", hullShape, null, hullColour, null));
 
         Rig rig = type.getRig();
-        List<SceneElement> rigShapes = rig.getSceneItems(Navigator nav
-        );
+        List<SceneElement> rigShapes = rig.getSceneItems(nav);
         for (SceneElement se : rigShapes) {
             se.setShape(transform.createTransformedShape(se.getShape()));
             shapes.add(se);
         }
         return shapes;
     }
-
 }

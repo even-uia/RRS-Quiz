@@ -1,14 +1,12 @@
 package even.rrs.animation.boatdef;
 
+import even.rrs.animation.Navigator;
+import even.rrs.animation.boat.Tack;
 import even.rrs.render.SceneElement;
 import java.awt.Color;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 /**
@@ -19,10 +17,6 @@ public class Rig
 {
 
     String id;
-    double forestayPos;
-    double mastDiameter;
-    double mastRadius;
-    double mastPos;
     double poleLen;
     double polePos;
     double poleDiameter;
@@ -34,38 +28,40 @@ public class Rig
     Sail spinnaker;
     Sail gennaker;
 
-    public Rig(String id, double mastPos, double forestayPos) {
+    public Rig(String id) {
         this.id = id;
-        this.mastPos = mastPos;
-        this.forestayPos = forestayPos;
-
-        mastDiameter = 0.08 * (mastPos - forestayPos);
-        mastRadius = mastDiameter / 2;
     }
 
-    public void createShapes() {
-        mastShape = new Ellipse2D.Double(-mastRadius, -mastRadius,
-                                         mastDiameter, mastDiameter);
-        boomShape = new Rectangle2D.Double(-mastRadius, 0,
-                                           mastDiameter, main.chord);
-    }
-
-    public List<SceneElement> getSceneItems(double twa, boolean trimmed) {
+    public List<SceneElement> getSceneItems(Navigator nav) {
         List<SceneElement> items = new ArrayList<>();
-        AffineTransform mastTransform = AffineTransform.getTranslateInstance(0, mastPos);
-        Shape transMastShape = mastTransform.createTransformedShape(mastShape);
-        System.out.format("Translating mast to %f, %f\n",
-                          transMastShape.getBounds2D().getCenterX(),
-                          transMastShape.getBounds2D().getCenterY());
-        items.add(new SceneElement("mast", transMastShape,
-                                   Color.LIGHT_GRAY, Color.LIGHT_GRAY, null));
+        double twa = nav.getTwa();
+        Tack tack = nav.getTack();
+        boolean trimmed = true;
+        boolean spinSet = spinnaker != null && twa > spinnaker.mintwa && nav.isUsingSpinnaker();
+        boolean genSet = gennaker != null && twa > gennaker.mintwa && nav.isUsingSpinnaker();
+
         if (main != null) {
-            if (main.isFlapping(mastPos, true))
+            Shape mainShape = main.getTransformedShape(twa, tack, trimmed, genSet);
+            Shape boomShape = main.getBoomShape();
+
+            items.add(new SceneElement("boom", boomShape,
+                                       Color.LIGHT_GRAY, Color.LIGHT_GRAY, null));
+            items.add(new SceneElement("main", mainShape, Color.WHITE, null, null));
+        }
+
+        if (jib != null) {
+            Shape jibShape = jib.getTransformedShape(twa, tack, trimmed, genSet);
+            items.add(new SceneElement("jib", jibShape, Color.WHITE, null, null));
+        }
+
+        if (spinSet) {
 
         }
 
-
-        System.out.println("Rig returning rendering items: " + items.size());
+        if (genSet) {
+            Shape genShape = gennaker.getTransformedShape(twa, tack, trimmed, genSet);
+            items.add(new SceneElement("gennaker", genShape, Color.WHITE, null, null));
+        }
         return items;
     }
 
@@ -93,18 +89,6 @@ public class Rig
 
     public String getId() {
         return id;
-    }
-
-    public double getForestayPos() {
-        return forestayPos;
-    }
-
-    public double getMastDiameter() {
-        return mastDiameter;
-    }
-
-    public double getMastPos() {
-        return mastPos;
     }
 
     public double getPoleLen() {

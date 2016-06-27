@@ -1,4 +1,4 @@
-package even.rrsquiz.animation.boat;
+package even.rrs.render;
 
 import java.awt.Image;
 import java.io.IOException;

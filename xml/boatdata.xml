@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<boatdefs xmlns="boatdata"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<boatdata xmlns="boatdata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="boatdata boatdata.xsd">
 
-
   <boattype id="skiff">
-    <hullref id="skiffhull" />
-    <rigref id="skiffrig" />
+    <hullref id="skiffhull"/>
+    <rigref id="skiffrig"/>
     <perfref id="skiffperf"/>
   </boattype>
 
   <hull id="skiffhull" beam="3" length="5">
     <start x="0" y="-2.5"/>
     <line x="0.6" y="0"/>
-    <line x="1.5" y="0" />
+    <line x="1.5" y="0"/>
     <line x="1.5" y="2.5"/>
     <line x="0.6" y="2.3"/>
     <line x="-0.6" y="2.3"/>
     <line x="-1.5" y="2.5"/>
-    <line x="-1.5" y="0" />
+    <line x="-1.5" y="0"/>
     <line x="-0.6" y="0"/>
     <line x="0" y="-2.5"/>
   </hull>
 
   <hull id="testhull" beam="2" length="6">
-    <start x="0" y="3"/>
-    <spline2 cx1="1" cy1="1" x="1" y="0" />
-    <line x="2" y="0"/>
-    <line x="2" y="-2" />
+    <start x="0" y="-3"/>
+    <spline2 cx1="1" cy1="0" x="1" y="1"/>
+    <line x="1" y="3"/>
+    <line x="-1" y="3"/>
+    <line x="-1" y="1"/>
+    <spline2 cx1="-1" cy1="0" x="0" y="-3"/>
   </hull>
 
   <rig id="skiffrig">
     <spinpole length="2"/>
-    <sail type="main" x="0" y="-0.2" chord="3" camber="0.06" minangle="5" maxangle="60" />
-    <sail type="jib" x="0" y="-2.2" chord="2" camber="0.08" minangle="10" maxangle="60" />
-    <sail type="gennaker"  x="0" y="-4.5" chord="3" camber="0.15" minangle="20" maxangle="60" mintwa="140"/>
+    <sail type="main" x="0" y="-0.2" chord="3" camber="0.06" minangle="5" maxangle="60"/>
+    <sail type="jib" x="0" y="-2.2" chord="2" camber="0.08" minangle="10" maxangle="60"/>
+    <sail type="gennaker" x="0" y="-4.5" chord="3" camber="0.15" minangle="20" maxangle="60"
+          mintwa="140"/>
   </rig>
 
-  <performance id="skiffperf" >
-    <polar >
+  <performance id="skiffperf">
+    <polar>
       <data twa="0" speed="0"/>
       <data twa="25" speed="5"/>
       <data twa="40" speed="10"/>
@@ -64,5 +65,4 @@
       <data twa="180" speed="4"/>
     </polar>
   </performance>
-
-</boatdefs>
+</boatdata>

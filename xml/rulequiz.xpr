@@ -5,6 +5,9 @@
         <options/>
     </meta>
     <projectTree name="rulequiz.xpr">
+        <file name="animation.xsd"/>
+        <file name="boatdata.xml"/>
+        <file name="boatdata.xsd"/>
         <file name="boatdef.xsd"/>
         <file name="boatdefs.xml"/>
         <file name="penalty.xml"/>
