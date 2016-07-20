@@ -3,11 +3,11 @@
 <animation xmlns="animation"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="animation animation.xsd"
-           width="24" height="18" duration="200">
+           width="24" height="18" duration="70">
   <boatdata file="boatdata.xml"/>
   <wind x="10" y="10"/>
   <startboat x="12" y="9" name="Startboat" twa="0" tack="PORT">
     <hullref ref="testhull"/>
-    <start time="100" prepflag="BLACKFLAG" />
+    <start time="60" prepflag="BLACKFLAG" />
   </startboat>
 </animation>

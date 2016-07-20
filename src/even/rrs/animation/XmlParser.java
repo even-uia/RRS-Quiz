@@ -1,6 +1,6 @@
 package even.rrs.animation;
 
-import static even.rrs.animation.XmlNameConstants.BOATDATA_XSD_FILENAME;
+import even.rrs.render.Flag;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,6 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaderJDOMFactory;
 import org.jdom2.input.sax.XMLReaderXSDFactory;
-import org.xml.sax.Attributes;
 
 
 /**
@@ -53,6 +52,10 @@ public class XmlParser
         return null;
     }
 
+    public String getStringValue(Element elt, String attr) {
+        return elt.getAttributeValue(attr);
+    }
+
     public int getIntValue(Element elt, String attr) {
         String sval = elt.getAttributeValue(attr);
         int ival = Integer.valueOf(sval);
@@ -83,6 +86,14 @@ public class XmlParser
         catch (Exception e) {
             return Color.PINK;
         }
+    }
+
+    public Flag getFlagValue(Element elt, String attr) {
+        String sval = elt.getAttributeValue(attr);
+        if (null == sval) return null;
+
+        Flag f = Flag.valueOf(sval);
+        return f;
     }
 
     /**

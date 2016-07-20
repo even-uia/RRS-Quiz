@@ -1,9 +1,11 @@
 package even.rrs.render;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+
 
 /**
  *
@@ -16,7 +18,7 @@ public enum Flag
     P, I, Z, BLACKFLAG,
     IND_RECALL, GEN_RECALL;
 
-    private Image image;
+    private BufferedImage image;
 
     private Flag() {
         String filename = this.name() + ".png";
@@ -29,7 +31,7 @@ public enum Flag
         }
     }
 
-    public Image getImage() {
+    public BufferedImage getImage() {
         return image;
     }
 }

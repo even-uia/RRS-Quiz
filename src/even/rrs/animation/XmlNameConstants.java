@@ -22,7 +22,7 @@ public interface XmlNameConstants
 
     public static final String MARK = "mark";
 
-    public static final String PREPFLAG = "prepflag";
+    public static final String PREPSIGNAL = "prepflag";
 
     public static final String REF = "ref";
 
@@ -53,6 +53,7 @@ public interface XmlNameConstants
     public static final String CY2 = "cy2";
 
     public static final String DATA = "data";
+    public static final String DURATION = "duration";
 
     public static final String FORESTAYPOS = "forestaypos";
 

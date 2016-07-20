@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Point2D;
 import java.util.EnumSet;
 
 
@@ -22,6 +23,7 @@ public class SceneElement
     Color fillColour;
     Stroke stroke;
     EnumSet<Flag> signals;
+    Point2D.Double sigPos;
 
     public SceneElement(String name, Shape shape, Color colour, Color fillColour, Stroke stroke) {
         this.name = name;
@@ -29,6 +31,7 @@ public class SceneElement
         this.colour = (null != colour) ? colour : DEFAULT_COLOR;
         this.fillColour = fillColour;
         this.stroke = (null != stroke) ? stroke : DEFAULT_STROKE;
+        this.signals = null;
     }
 
     public SceneElement(String name,
@@ -36,9 +39,11 @@ public class SceneElement
                         Color colour,
                         Color fillColour,
                         Stroke stroke,
-                        EnumSet<Flag> signals) {
+                        EnumSet<Flag> signals,
+                        Point2D.Double sigPos) {
         this(name, shape, colour, fillColour, stroke);
         this.signals = signals;
+        this.sigPos = sigPos;
     }
 
     public Shape getShape() {

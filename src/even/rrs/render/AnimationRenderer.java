@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.util.List;
 import javax.swing.JComponent;
 
@@ -77,6 +78,16 @@ public class AnimationRenderer extends JComponent
             g2.setStroke(item.stroke);
             g2.setColor(item.colour);
             g2.draw(scaledShape);
+
+            if (item.signals != null) {
+                Point2D spos = scaler.transform(item.sigPos, null);
+                System.out.println("Rendering signals: " + item.signals);;
+                for (Flag flag : item.signals) {
+                    g2.drawImage(flag.getImage(), null, (int) spos.getX(), (int) spos.getY());
+                    spos.setLocation(spos.getX(),
+                                     spos.getY() + flag.getImage().getHeight() + 5);
+                }
+            }
         }
     }
 

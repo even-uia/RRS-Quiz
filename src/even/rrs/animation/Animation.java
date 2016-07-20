@@ -4,6 +4,7 @@ import even.rrs.animation.boat.NavData;
 import even.rrs.animation.boat.Tack;
 import even.rrs.animation.boatdef.Hull;
 import even.rrs.render.AnimationRenderer;
+import even.rrs.render.Flag;
 import even.rrs.render.Scene;
 import even.util.EventManager;
 import java.awt.Color;
@@ -39,6 +40,7 @@ public class Animation implements XmlNameConstants
     AnimationRenderer renderer;
 
     Dimension dim; // screen or real
+    int duration;
 
     State state;
     Timer timer;
@@ -86,6 +88,7 @@ public class Animation implements XmlNameConstants
         namespace = root.getNamespace();
         int width = parser.getIntValue(root, WIDTH);
         int height = parser.getIntValue(root, HEIGHT);
+        duration = parser.getIntValue(root, DURATION);
         dim = new Dimension(width, height);
 
         loadBoatData(root);
@@ -127,6 +130,7 @@ public class Animation implements XmlNameConstants
         NavData pos = new NavData(x, y, tack, twa);
         Color colour = parser.getColourValue(sbe, COLOUR);
         StartBoat startBoat = new StartBoat(pos, colour);
+
         actorMgr.addActor(startBoat);
         sceneManager.add(startBoat);
         // todo - create startboat and starter
@@ -145,8 +149,9 @@ public class Animation implements XmlNameConstants
         Element se = sbe.getChild(START, namespace);
         if (se != null) {
             int time = parser.getIntValue(se, TIME);
-            String prepFlag = se.getAttributeValue(PREPFLAG);
-            startBoat.setStart(time, prepFlag);
+            Flag prepSignal = parser.getFlagValue(se, PREPSIGNAL);
+            startBoat.setStart(time, prepSignal);
+
         }
     }
 
@@ -186,7 +191,7 @@ public class Animation implements XmlNameConstants
      * Advances animation time one step (or tick).
      */
     public void stepTime() {
-        System.out.println("\n\n===============================\n== Start callback");
+        System.out.println("\n\n===============================\n== Start timer callback");
         System.out.flush();
         if (state != State.FINISHED) {
             System.out.print("tick...");
@@ -196,10 +201,19 @@ public class Animation implements XmlNameConstants
 
             Scene scene = sceneManager.makeScene(dim, time);
             renderer.setScene(scene);
+            if (time > duration) finishAnimation();
 
         }
-        System.out.println("===============================\n== End callback\n");
+        else System.out.println("FINISHED");
+        System.out.println("===============================\n== End timer callback\n");
         System.out.flush();
+    }
+
+    private void finishAnimation() {
+        state = State.FINISHED;
+        System.out.println("Animation is finished");
+        timer.stop();
+        timer = null;
     }
 
     /**

@@ -19,16 +19,6 @@
             <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/animation/Animation.java</file>
             <file>file:/home/evenal/Projects/RRS/trunk/src/even/rrs/render/AnimationRenderer.java</file>
         </group>
-        <group name="RRS">
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/animation.xsd</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/SceneManager.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/render/Scene.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/xml/start.xml</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Navigator.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/gui/AnimationPanel.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/boat/NavData.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/XmlNameConstants.java</file>
-            <file>file:/C:/Prosjekter/RRS-Quiz.git/trunk/src/even/rrs/animation/Animation.java</file>
-        </group>
+        <group name="RRS"/>
     </open-files>
 </project-private>

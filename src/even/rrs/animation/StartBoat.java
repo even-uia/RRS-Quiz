@@ -8,6 +8,7 @@ import even.rrs.render.SceneElement;
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -33,9 +34,9 @@ public class StartBoat implements Actor, Drawable
         signals = EnumSet.noneOf(Flag.class);
     }
 
-    public void setStart(int time, String prepFlag) {
+    public void setStart(int time, Flag prepFlag) {
         start = new StartProcedure(time,
-                                   Flag.valueOf(prepFlag));
+                                   (prepFlag));
     }
 
     public void act(int t) {
@@ -47,10 +48,14 @@ public class StartBoat implements Actor, Drawable
         List<SceneElement> shapes = new ArrayList<>();
         AffineTransform trfm = pos.getTransform();
         Shape hullShape = trfm.createTransformedShape(hull.getShape());
+        Point2D.Double fpos = new Point2D.Double(0,
+                                                 0);
+        trfm.transform(fpos, fpos);
 
         shapes.add(new SceneElement("Startboat",
                                     hullShape, null, colour, null,
-                                    signals));
+                                    signals,
+                                    fpos));
         return shapes;
     }
 
@@ -78,7 +83,7 @@ public class StartBoat implements Actor, Drawable
 
     private class StartProcedure
     {
-        public static final int MINUTE = 20; // number of frames / "minute"
+        public static final int MINUTE = 10; // number of frames / "minute"
         int startTime;
         Flag classFlag, prepSignal;
         Step step;
@@ -87,6 +92,7 @@ public class StartBoat implements Actor, Drawable
         public StartProcedure(int startTime, Flag prepSignal) {
             this.startTime = startTime;
             this.prepSignal = prepSignal;
+            if (prepSignal == null) prepSignal = Flag.P;
             step = Step.WARNING;
             nextStepTime = startTime - 5 * MINUTE;
         }
